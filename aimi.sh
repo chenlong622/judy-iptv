@@ -57,11 +57,48 @@ server {
         sub_filter "https://cs7.vpstv.net" "http://$PUBLIC_IP:8070";
         sub_filter "https://cs9.vpstv.net" "http://$PUBLIC_IP:8070";
         sub_filter "https://cs10.vpstv.net" "http://$PUBLIC_IP:8070";
+        sub_filter "https://cs1.vpstv.net/key" "http://$PUBLIC_IP:8070/key1";
+        sub_filter "https://cs1.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls1";
+        sub_filter "https://cs2.vpstv.net/key" "http://$PUBLIC_IP:8070/key2";
+        sub_filter "https://cs2.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls2";
+        sub_filter "https://cs3.vpstv.net/key" "http://$PUBLIC_IP:8070/key3";
+        sub_filter "https://cs3.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls3";
+        sub_filter "https://cs4.vpstv.net/key" "http://$PUBLIC_IP:8070/key4";
+        sub_filter "https://cs4.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls4";
+        sub_filter "https://cs5.vpstv.net/key" "http://$PUBLIC_IP:8070/key5";
+        sub_filter "https://cs5.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls5";
+        sub_filter "https://cs6.vpstv.net/key" "http://$PUBLIC_IP:8070/key6";
+        sub_filter "https://cs6.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls6";
+        sub_filter "https://cs7.vpstv.net/key" "http://$PUBLIC_IP:8070/key7";
+        sub_filter "https://cs7.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls7";
+        # cs8是默认情况
+        sub_filter "https://cs9.vpstv.net/key" "http://$PUBLIC_IP:8070/key9";
+        sub_filter "https://cs9.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls9";
+        sub_filter "https://cs10.vpstv.net/key" "http://$PUBLIC_IP:8070/key10";
+        sub_filter "https://cs10.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls10";
     }
+    # 替换原有的location块为完整的cs1到cs10配置
     location ^~ /key/ { proxy_pass https://cs8.vpstv.net/key/; }
+    location ^~ /key1/ { proxy_pass https://cs1.vpstv.net/key/; }
+    location ^~ /key2/ { proxy_pass https://cs2.vpstv.net/key/; }
+    location ^~ /key3/ { proxy_pass https://cs3.vpstv.net/key/; }
     location ^~ /key4/ { proxy_pass https://cs4.vpstv.net/key/; }
+    location ^~ /key5/ { proxy_pass https://cs5.vpstv.net/key/; }
+    location ^~ /key6/ { proxy_pass https://cs6.vpstv.net/key/; }
+    location ^~ /key7/ { proxy_pass https://cs7.vpstv.net/key/; }
+    location ^~ /key9/ { proxy_pass https://cs9.vpstv.net/key/; }
+    location ^~ /key10/ { proxy_pass https://cs10.vpstv.net/key/; }
+    
     location ^~ /hls/ { proxy_pass https://cs8.vpstv.net/hls/; }
+    location ^~ /hls1/ { proxy_pass https://cs1.vpstv.net/hls/; }
+    location ^~ /hls2/ { proxy_pass https://cs2.vpstv.net/hls/; }
+    location ^~ /hls3/ { proxy_pass https://cs3.vpstv.net/hls/; }
     location ^~ /hls4/ { proxy_pass https://cs4.vpstv.net/hls/; }
+    location ^~ /hls5/ { proxy_pass https://cs5.vpstv.net/hls/; }
+    location ^~ /hls6/ { proxy_pass https://cs6.vpstv.net/hls/; }
+    location ^~ /hls7/ { proxy_pass https://cs7.vpstv.net/hls/; }
+    location ^~ /hls9/ { proxy_pass https://cs9.vpstv.net/hls/; }
+    location ^~ /hls10/ { proxy_pass https://cs10.vpstv.net/hls/; }
 }
 EOF
 
@@ -142,11 +179,49 @@ server {
         sub_filter "https://cs7.vpstv.net" "https://$DOMAIN";
         sub_filter "https://cs9.vpstv.net" "https://$DOMAIN";
         sub_filter "https://cs10.vpstv.net" "https://$DOMAIN";
+        # 为HTTPS模式添加同样的替换规则
+        sub_filter "https://cs1.vpstv.net/key" "https://$DOMAIN/key1";
+        sub_filter "https://cs1.vpstv.net/hls" "https://$DOMAIN/hls1";
+        sub_filter "https://cs2.vpstv.net/key" "https://$DOMAIN/key2";
+        sub_filter "https://cs2.vpstv.net/hls" "https://$DOMAIN/hls2";
+        sub_filter "https://cs3.vpstv.net/key" "https://$DOMAIN/key3";
+        sub_filter "https://cs3.vpstv.net/hls" "https://$DOMAIN/hls3";
+        sub_filter "https://cs4.vpstv.net/key" "https://$DOMAIN/key4";
+        sub_filter "https://cs4.vpstv.net/hls" "https://$DOMAIN/hls4";
+        sub_filter "https://cs5.vpstv.net/key" "https://$DOMAIN/key5";
+        sub_filter "https://cs5.vpstv.net/hls" "https://$DOMAIN/hls5";
+        sub_filter "https://cs6.vpstv.net/key" "https://$DOMAIN/key6";
+        sub_filter "https://cs6.vpstv.net/hls" "https://$DOMAIN/hls6";
+        sub_filter "https://cs7.vpstv.net/key" "https://$DOMAIN/key7";
+        sub_filter "https://cs7.vpstv.net/hls" "https://$DOMAIN/hls7";
+        # cs8是默认情况
+        sub_filter "https://cs9.vpstv.net/key" "https://$DOMAIN/key9";
+        sub_filter "https://cs9.vpstv.net/hls" "https://$DOMAIN/hls9";
+        sub_filter "https://cs10.vpstv.net/key" "https://$DOMAIN/key10";
+        sub_filter "https://cs10.vpstv.net/hls" "https://$DOMAIN/hls10";
     }
+    # 替换原有的location块为完整的cs1到cs10配置
     location ^~ /key/ { proxy_pass https://cs8.vpstv.net/key/; }
+    location ^~ /key1/ { proxy_pass https://cs1.vpstv.net/key/; }
+    location ^~ /key2/ { proxy_pass https://cs2.vpstv.net/key/; }
+    location ^~ /key3/ { proxy_pass https://cs3.vpstv.net/key/; }
     location ^~ /key4/ { proxy_pass https://cs4.vpstv.net/key/; }
+    location ^~ /key5/ { proxy_pass https://cs5.vpstv.net/key/; }
+    location ^~ /key6/ { proxy_pass https://cs6.vpstv.net/key/; }
+    location ^~ /key7/ { proxy_pass https://cs7.vpstv.net/key/; }
+    location ^~ /key9/ { proxy_pass https://cs9.vpstv.net/key/; }
+    location ^~ /key10/ { proxy_pass https://cs10.vpstv.net/key/; }
+    
     location ^~ /hls/ { proxy_pass https://cs8.vpstv.net/hls/; }
+    location ^~ /hls1/ { proxy_pass https://cs1.vpstv.net/hls/; }
+    location ^~ /hls2/ { proxy_pass https://cs2.vpstv.net/hls/; }
+    location ^~ /hls3/ { proxy_pass https://cs3.vpstv.net/hls/; }
     location ^~ /hls4/ { proxy_pass https://cs4.vpstv.net/hls/; }
+    location ^~ /hls5/ { proxy_pass https://cs5.vpstv.net/hls/; }
+    location ^~ /hls6/ { proxy_pass https://cs6.vpstv.net/hls/; }
+    location ^~ /hls7/ { proxy_pass https://cs7.vpstv.net/hls/; }
+    location ^~ /hls9/ { proxy_pass https://cs9.vpstv.net/hls/; }
+    location ^~ /hls10/ { proxy_pass https://cs10.vpstv.net/hls/; }
 }
 EOF
 
