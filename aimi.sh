@@ -2,6 +2,17 @@
 
 set -e
 
+# 检测系统类型
+if [ -f /etc/debian_version ]; then
+    OS_TYPE="debian"
+elif [ -f /etc/redhat-release ]; then
+    OS_TYPE="centos"
+else
+    echo "不支持的系统类型！目前支持Debian/Ubuntu和CentOS系统。"
+    exit 1
+fi
+
+echo "检测到系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
 echo "请选择操作："
 echo "1) 使用公网IP，监听8070端口 (HTTP)"
 echo "2) 使用自定义域名，监听80/443端口 (HTTPS)"
@@ -13,27 +24,53 @@ if [[ "$mode" != "1" && "$mode" != "2" && "$mode" != "3" ]]; then
     exit 1
 fi
 
+# 根据系统类型设置路径和命令
+if [ "$OS_TYPE" == "debian" ]; then
+    PKG_MANAGER="apt"
+    NGINX_SITES_AVAILABLE="/etc/nginx/sites-available"
+    NGINX_SITES_ENABLED="/etc/nginx/sites-enabled"
+    WEBROOT="/var/www/html"
+else # centos
+    PKG_MANAGER="$(command -v dnf >/dev/null && echo 'dnf' || echo 'yum')"
+    NGINX_SITES_AVAILABLE="/etc/nginx/conf.d"
+    NGINX_SITES_ENABLED="/etc/nginx/conf.d"
+    WEBROOT="/usr/share/nginx/html"
+fi
+
 # 卸载功能
 if [ "$mode" == "3" ]; then
     echo "开始卸载..."
     
     # 删除Nginx配置
-    rm -f /etc/nginx/sites-available/stream_proxy
-    rm -f /etc/nginx/sites-enabled/stream_proxy
-    
-    # 恢复默认配置
-    if [ -f /etc/nginx/sites-available/default ]; then
-        ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+    if [ "$OS_TYPE" == "debian" ]; then
+        rm -f ${NGINX_SITES_AVAILABLE}/stream_proxy
+        rm -f ${NGINX_SITES_ENABLED}/stream_proxy
+        
+        # 恢复默认配置
+        if [ -f ${NGINX_SITES_AVAILABLE}/default ]; then
+            ln -sf ${NGINX_SITES_AVAILABLE}/default ${NGINX_SITES_ENABLED}/default
+        fi
+    else # centos
+        rm -f ${NGINX_SITES_AVAILABLE}/stream_proxy.conf
     fi
     
     # 删除SSL证书目录
     rm -rf /etc/nginx/ssl/
     
     # 关闭防火墙规则
-    if command -v ufw &> /dev/null; then
-        ufw delete allow 8070/tcp 2>/dev/null || true
-        ufw delete allow 80/tcp 2>/dev/null || true
-        ufw delete allow 443/tcp 2>/dev/null || true
+    if [ "$OS_TYPE" == "debian" ]; then
+        if command -v ufw &> /dev/null; then
+            ufw delete allow 8070/tcp 2>/dev/null || true
+            ufw delete allow 80/tcp 2>/dev/null || true
+            ufw delete allow 443/tcp 2>/dev/null || true
+        fi
+    else # centos
+        if command -v firewall-cmd &> /dev/null && systemctl is-active firewalld &>/dev/null; then
+            firewall-cmd --permanent --remove-port=8070/tcp 2>/dev/null || true
+            firewall-cmd --permanent --remove-port=80/tcp 2>/dev/null || true
+            firewall-cmd --permanent --remove-port=443/tcp 2>/dev/null || true
+            firewall-cmd --reload
+        fi
     fi
     
     # 重启Nginx
@@ -46,10 +83,32 @@ if [ "$mode" == "3" ]; then
     exit 0
 fi
 
-apt update
-apt install -y nginx curl
+# 安装依赖
+if [ "$OS_TYPE" == "debian" ]; then
+    apt update
+    apt install -y nginx curl
+else # centos
+    $PKG_MANAGER install -y epel-release
+    $PKG_MANAGER update
+    $PKG_MANAGER install -y nginx curl
+    
+    # 确保nginx目录存在
+    mkdir -p ${NGINX_SITES_AVAILABLE}
+    
+    # 启用并启动nginx服务
+    systemctl enable nginx
+    systemctl start nginx
+    
+    # 创建网站根目录（如果不存在）
+    mkdir -p $WEBROOT
+fi
 
-conf_path="/etc/nginx/sites-available/stream_proxy"
+# 设置配置文件路径
+if [ "$OS_TYPE" == "debian" ]; then
+    conf_path="${NGINX_SITES_AVAILABLE}/stream_proxy"
+else # centos
+    conf_path="${NGINX_SITES_AVAILABLE}/stream_proxy.conf"
+fi
 
 if [ "$mode" == "2" ]; then
     read -p "请输入你的自定义域名(如: proxy.xxx.com): " mydomain
@@ -59,10 +118,16 @@ if [ "$mode" == "2" ]; then
     fi
     cert_dir="/etc/nginx/ssl/$mydomain"
     mkdir -p $cert_dir
-    apt install -y socat
+    
+    if [ "$OS_TYPE" == "debian" ]; then
+        apt install -y socat
+    else # centos
+        $PKG_MANAGER install -y socat
+    fi
+    
     curl https://get.acme.sh | sh
     ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-    ~/.acme.sh/acme.sh --issue -d $mydomain --webroot /var/www/html
+    ~/.acme.sh/acme.sh --issue -d $mydomain --webroot $WEBROOT
     ~/.acme.sh/acme.sh --install-cert -d $mydomain \
       --key-file $cert_dir/$mydomain.key \
       --fullchain-file $cert_dir/fullchain.cer
@@ -94,6 +159,11 @@ if [ "$mode" == "2" ]; then
         return 301 https://$host$request_uri;
     }
 EOF2
+
+    # 针对CentOS调整acme-challenge目录
+    if [ "$OS_TYPE" == "centos" ]; then
+        sed -i "s|root /var/www/html;|root $WEBROOT;|" $conf_path
+    fi
 else
     cat >> $conf_path << 'EOF3'
     # m3u8 自动 sub_filter
@@ -205,24 +275,57 @@ HTTPSSERVER
 HTTPSCONFIG
 fi
 
-ln -sf $conf_path /etc/nginx/sites-enabled/stream_proxy
-rm -f /etc/nginx/sites-enabled/default
-
-# 添加防火墙规则(如果有UFW)
-if command -v ufw &> /dev/null; then
-    if [ "$mode" == "1" ]; then
-        ufw allow 8070/tcp
-    else
-        ufw allow 80/tcp
-        ufw allow 443/tcp
+# 根据系统类型处理nginx配置
+if [ "$OS_TYPE" == "debian" ]; then
+    ln -sf $conf_path ${NGINX_SITES_ENABLED}/stream_proxy
+    rm -f ${NGINX_SITES_ENABLED}/default
+else # centos
+    # CentOS中配置文件直接位于conf.d目录下，不需要创建符号链接
+    
+    # 禁用默认配置（如果存在）
+    if [ -f /etc/nginx/conf.d/default.conf ]; then
+        mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
     fi
 fi
 
+# 添加防火墙规则
+if [ "$OS_TYPE" == "debian" ]; then
+    if command -v ufw &> /dev/null; then
+        if [ "$mode" == "1" ]; then
+            ufw allow 8070/tcp
+        else
+            ufw allow 80/tcp
+            ufw allow 443/tcp
+        fi
+    fi
+else # centos
+    if command -v firewall-cmd &> /dev/null && systemctl is-active firewalld &>/dev/null; then
+        if [ "$mode" == "1" ]; then
+            firewall-cmd --permanent --add-port=8070/tcp
+        else
+            firewall-cmd --permanent --add-port=80/tcp
+            firewall-cmd --permanent --add-port=443/tcp
+        fi
+        firewall-cmd --reload
+    else
+        echo "警告：FirewallD未运行，请手动开放必要端口或使用其他防火墙管理工具。"
+    fi
+fi
+
+# SELinux处理（CentOS特有）
+if [ "$OS_TYPE" == "centos" ] && command -v sestatus &>/dev/null && sestatus | grep -q "enabled"; then
+    echo "检测到SELinux已启用，设置适当的SELinux策略..."
+    $PKG_MANAGER install -y policycoreutils-python-utils || $PKG_MANAGER install -y policycoreutils-python
+    setsebool -P httpd_can_network_connect 1
+fi
+
+# 检查配置并重启服务
 nginx -t && systemctl restart nginx
 
 IP=$(curl -s ifconfig.me || curl -s ipinfo.io/ip)
 
 echo "=========================="
+echo "系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
 if [ "$mode" == "1" ]; then
     echo "HTTP 部署完成！"
     echo "主入口：http://$IP:8070/"
