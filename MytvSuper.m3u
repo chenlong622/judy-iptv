@@ -21,7 +21,7 @@ https://judy.diver.eu.org/websuper265.php?id=B
 
 
 
-#EXTINF:-1 tvg-id="ROCK Extreme" tvg-name="ROCK Extreme" tvg-logo="" group-title="電影戲劇", ROCK Extreme
+#EXTINF:-1 tvg-id="ROCK Extreme" tvg-name="ROCK Extreme" tvg-logo="" group-title="戲劇電影", ROCK Extreme
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=56e7f3bf6e1f142a3ac51b2ca83e7919:ba733df582f18b4b9c990a52d61d2fc6
@@ -79,13 +79,13 @@ https://judy.diver.eu.org/websuper265.php?id=SMUS
 #KODIPROP:inputstream.adaptive.license_key=d841bf650caca3bf4441a536ae8580d5:c401a71b63dfa7bab1be378605973c2c
 https://judy.diver.eu.org/websuper265.php?id=SGOL
 
-#EXTINF:-1 tvg-id="MytvSuper" tvg-name="SUPER煲劇" tvg-logo="https://assets.livednow.com/logo/MytvSuper.png" group-title="電影戲劇", SUPER煲劇
+#EXTINF:-1 tvg-id="MytvSuper" tvg-name="SUPER煲劇" tvg-logo="https://assets.livednow.com/logo/MytvSuper.png" group-title="戲劇電影", SUPER煲劇
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=203638a2e2fd4786190a58393640de54:97e1ec12dda5ee64561e072d9825e3b0
 https://judy.diver.eu.org/websuper265.php?id=SSIT
 
-#EXTINF:-1 tvg-id="MytvSuper" tvg-name="SUPER劇場" tvg-logo="https://assets.livednow.com/logo/MytvSuper.png" group-title="電影戲劇", SUPER劇場
+#EXTINF:-1 tvg-id="MytvSuper" tvg-name="SUPER劇場" tvg-logo="https://assets.livednow.com/logo/MytvSuper.png" group-title="戲劇電影", SUPER劇場
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=b6c020768505fa6c7910726b8ca302f0:4b5cba6d27559e6f28a232791f068824
@@ -488,4 +488,3 @@ https://judy.diver.eu.org/websuper265.php?id=C3
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=1ba88eacde780c7567255b8b33026ae5:f7df792aab8992b79d72a8d01987ecb5
 https://judy.diver.eu.org/websuper265.php?id=C2
-
