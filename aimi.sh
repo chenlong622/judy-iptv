@@ -31,7 +31,7 @@ if [ "$OS_TYPE" == "debian" ]; then
     NGINX_SITES_ENABLED="/etc/nginx/sites-enabled"
     WEBROOT="/var/www/html"
 else # centos
-    PKG_MANAGER="$(command -v dnf >/dev/null && echo 'dnf' || echo 'yum')"
+    PKG_MANAGER="$(command -v dnf >/dev/null 2>&1 && echo 'dnf' || echo 'yum')"
     NGINX_SITES_AVAILABLE="/etc/nginx/conf.d"
     NGINX_SITES_ENABLED="/etc/nginx/conf.d"
     WEBROOT="/usr/share/nginx/html"
@@ -88,19 +88,35 @@ if [ "$OS_TYPE" == "debian" ]; then
     apt update
     apt install -y nginx curl
 else # centos
+    # 安装EPEL仓库
     $PKG_MANAGER install -y epel-release
+    
+    # 为CentOS安装Nginx官方仓库
+    if [ ! -f /etc/yum.repos.d/nginx.repo ]; then
+        echo "[nginx-stable]" > /etc/yum.repos.d/nginx.repo
+        echo "name=nginx stable repo" >> /etc/yum.repos.d/nginx.repo
+        echo "baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/" >> /etc/yum.repos.d/nginx.repo
+        echo "gpgcheck=1" >> /etc/yum.repos.d/nginx.repo
+        echo "enabled=1" >> /etc/yum.repos.d/nginx.repo
+        echo "gpgkey=https://nginx.org/keys/nginx_signing.key" >> /etc/yum.repos.d/nginx.repo
+        echo "module_hotfixes=true" >> /etc/yum.repos.d/nginx.repo
+    fi
+    
+    # 清理并更新缓存
+    $PKG_MANAGER clean all
+    $PKG_MANAGER makecache
+    
+    # 安装Nginx和curl
     $PKG_MANAGER update
     $PKG_MANAGER install -y nginx curl
     
     # 确保nginx目录存在
     mkdir -p ${NGINX_SITES_AVAILABLE}
+    mkdir -p $WEBROOT
     
     # 启用并启动nginx服务
     systemctl enable nginx
-    systemctl start nginx
-    
-    # 创建网站根目录（如果不存在）
-    mkdir -p $WEBROOT
+    systemctl start nginx || echo "警告：nginx服务启动失败，将在配置完成后再次尝试启动"
 fi
 
 # 设置配置文件路径
@@ -280,12 +296,18 @@ if [ "$OS_TYPE" == "debian" ]; then
     ln -sf $conf_path ${NGINX_SITES_ENABLED}/stream_proxy
     rm -f ${NGINX_SITES_ENABLED}/default
 else # centos
-    # CentOS中配置文件直接位于conf.d目录下，不需要创建符号链接
-    
-    # 禁用默认配置（如果存在）
+    # CentOS下可能需要备份默认配置
     if [ -f /etc/nginx/conf.d/default.conf ]; then
         mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
     fi
+fi
+
+# SELinux处理（CentOS特有）
+if [ "$OS_TYPE" == "centos" ] && command -v sestatus &>/dev/null && sestatus | grep -q "enabled"; then
+    echo "检测到SELinux已启用，设置适当的SELinux策略..."
+    $PKG_MANAGER install -y policycoreutils-python-utils || $PKG_MANAGER install -y policycoreutils-python
+    setsebool -P httpd_can_network_connect 1
+    restorecon -Rv /etc/nginx/
 fi
 
 # 添加防火墙规则
@@ -307,20 +329,15 @@ else # centos
             firewall-cmd --permanent --add-port=443/tcp
         fi
         firewall-cmd --reload
-    else
-        echo "警告：FirewallD未运行，请手动开放必要端口或使用其他防火墙管理工具。"
     fi
 fi
 
-# SELinux处理（CentOS特有）
-if [ "$OS_TYPE" == "centos" ] && command -v sestatus &>/dev/null && sestatus | grep -q "enabled"; then
-    echo "检测到SELinux已启用，设置适当的SELinux策略..."
-    $PKG_MANAGER install -y policycoreutils-python-utils || $PKG_MANAGER install -y policycoreutils-python
-    setsebool -P httpd_can_network_connect 1
-fi
-
 # 检查配置并重启服务
-nginx -t && systemctl restart nginx
+nginx -t
+systemctl restart nginx || {
+    echo "Nginx启动失败，请检查错误日志："
+    journalctl -xe --unit=nginx
+}
 
 IP=$(curl -s ifconfig.me || curl -s ipinfo.io/ip)
 
