@@ -2,240 +2,233 @@
 
 set -e
 
-echo "============================"
-echo "🌐 请选择部署方式："
+echo "请选择操作："
 echo "1) 使用公网IP，监听8070端口 (HTTP)"
 echo "2) 使用自定义域名，监听80/443端口 (HTTPS)"
-echo "============================"
-read -p "请输入选项 [1 或 2]: " MODE
+echo "3) 卸载所有安装内容"
+read -p "请输入数字(1、2或3): " mode
 
-if [[ "$MODE" == "1" ]]; then
-    echo "[模式1] 使用公网IP + 8070端口"
-
-    PUBLIC_IP=$(curl -s https://api.ipify.org)
-    if [[ -z "$PUBLIC_IP" ]]; then
-        echo "❌ 获取公网IP失败。"
-        exit 1
-    fi
-    echo "✅ 获取到公网IP: $PUBLIC_IP"
-
-    # 安装 nginx
-    sudo apt update
-    sudo apt install -y nginx
-
-    # 配置nginx
-    NGINX_CONF="/etc/nginx/sites-available/aimi-ip8070"
-    sudo tee $NGINX_CONF > /dev/null <<EOF
-server {
-    listen 8070;
-    server_name $PUBLIC_IP;
-    sub_filter_types *;
-    sub_filter_once off;
-
-    location ^~ /streams/ {
-        proxy_pass https://hls-gateway.vpstv.net/streams/;
-        proxy_set_header Accept-Encoding "";
-        proxy_set_header Host hls-gateway.vpstv.net;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_http_version 1.1;
-        proxy_set_header Connection "";
-        proxy_cache off;
-        proxy_ssl_server_name on;
-        proxy_ssl_protocols TLSv1.2 TLSv1.3;
-        proxy_ssl_verify off;
-
-        sub_filter "https://cs8.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs4.vpstv.net/key" "http://$PUBLIC_IP:8070/key4";
-        sub_filter "https://cs4.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls4";
-        sub_filter "https://cs1.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs2.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs3.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs5.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs6.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs7.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs9.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs10.vpstv.net" "http://$PUBLIC_IP:8070";
-        sub_filter "https://cs1.vpstv.net/key" "http://$PUBLIC_IP:8070/key1";
-        sub_filter "https://cs1.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls1";
-        sub_filter "https://cs2.vpstv.net/key" "http://$PUBLIC_IP:8070/key2";
-        sub_filter "https://cs2.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls2";
-        sub_filter "https://cs3.vpstv.net/key" "http://$PUBLIC_IP:8070/key3";
-        sub_filter "https://cs3.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls3";
-        sub_filter "https://cs4.vpstv.net/key" "http://$PUBLIC_IP:8070/key4";
-        sub_filter "https://cs4.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls4";
-        sub_filter "https://cs5.vpstv.net/key" "http://$PUBLIC_IP:8070/key5";
-        sub_filter "https://cs5.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls5";
-        sub_filter "https://cs6.vpstv.net/key" "http://$PUBLIC_IP:8070/key6";
-        sub_filter "https://cs6.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls6";
-        sub_filter "https://cs7.vpstv.net/key" "http://$PUBLIC_IP:8070/key7";
-        sub_filter "https://cs7.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls7";
-        # cs8是默认情况
-        sub_filter "https://cs9.vpstv.net/key" "http://$PUBLIC_IP:8070/key9";
-        sub_filter "https://cs9.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls9";
-        sub_filter "https://cs10.vpstv.net/key" "http://$PUBLIC_IP:8070/key10";
-        sub_filter "https://cs10.vpstv.net/hls" "http://$PUBLIC_IP:8070/hls10";
-    }
-    # 替换原有的location块为完整的cs1到cs10配置
-    location ^~ /key/ { proxy_pass https://cs8.vpstv.net/key/; }
-    location ^~ /key1/ { proxy_pass https://cs1.vpstv.net/key/; }
-    location ^~ /key2/ { proxy_pass https://cs2.vpstv.net/key/; }
-    location ^~ /key3/ { proxy_pass https://cs3.vpstv.net/key/; }
-    location ^~ /key4/ { proxy_pass https://cs4.vpstv.net/key/; }
-    location ^~ /key5/ { proxy_pass https://cs5.vpstv.net/key/; }
-    location ^~ /key6/ { proxy_pass https://cs6.vpstv.net/key/; }
-    location ^~ /key7/ { proxy_pass https://cs7.vpstv.net/key/; }
-    location ^~ /key9/ { proxy_pass https://cs9.vpstv.net/key/; }
-    location ^~ /key10/ { proxy_pass https://cs10.vpstv.net/key/; }
-    
-    location ^~ /hls/ { proxy_pass https://cs8.vpstv.net/hls/; }
-    location ^~ /hls1/ { proxy_pass https://cs1.vpstv.net/hls/; }
-    location ^~ /hls2/ { proxy_pass https://cs2.vpstv.net/hls/; }
-    location ^~ /hls3/ { proxy_pass https://cs3.vpstv.net/hls/; }
-    location ^~ /hls4/ { proxy_pass https://cs4.vpstv.net/hls/; }
-    location ^~ /hls5/ { proxy_pass https://cs5.vpstv.net/hls/; }
-    location ^~ /hls6/ { proxy_pass https://cs6.vpstv.net/hls/; }
-    location ^~ /hls7/ { proxy_pass https://cs7.vpstv.net/hls/; }
-    location ^~ /hls9/ { proxy_pass https://cs9.vpstv.net/hls/; }
-    location ^~ /hls10/ { proxy_pass https://cs10.vpstv.net/hls/; }
-}
-EOF
-
-    sudo ln -sf $NGINX_CONF /etc/nginx/sites-enabled/aimi-ip8070
-    sudo nginx -t
-    sudo systemctl reload nginx
-
-    if command -v ufw &> /dev/null; then
-        sudo ufw allow 8070
-        sudo ufw reload
-    fi
-
-    echo "✅ 部署完成！现在可通过 http://$PUBLIC_IP:8070 访问。"
-
-elif [[ "$MODE" == "2" ]]; then
-    echo "[模式2] 使用自定义域名 + 80/443端口"
-
-    read -p "请输入你的域名（如 stream.example.com）: " DOMAIN
-
-    if [[ -z "$DOMAIN" ]]; then
-        echo "❌ 域名不能为空"
-        exit 1
-    fi
-
-    PUBLIC_IP=$(curl -s https://api.ipify.org)
-    echo "🌐 当前公网IP: $PUBLIC_IP"
-    echo "⚠️ 请确保你的域名 [$DOMAIN] 已解析到此 IP"
-    read -p "继续部署并自动申请HTTPS？[y/n]: " CONFIRM
-    if [[ "$CONFIRM" != "y" ]]; then
-        echo "❌ 用户取消操作。"
-        exit 0
-    fi
-
-    sudo apt update
-    sudo apt install -y nginx python3-certbot-nginx
-
-    NGINX_CONF="/etc/nginx/sites-available/aimi-$DOMAIN"
-    sudo tee $NGINX_CONF > /dev/null <<EOF
-server {
-    listen 80;
-    server_name $DOMAIN;
-    return 301 https://\$host\$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name $DOMAIN;
-
-    ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
-    ssl_protocols TLSv1.2 TLSv1.3;
-
-    sub_filter_types *;
-    sub_filter_once off;
-
-    location ^~ /streams/ {
-        proxy_pass https://hls-gateway.vpstv.net/streams/;
-        proxy_set_header Accept-Encoding "";
-        proxy_set_header Host hls-gateway.vpstv.net;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_http_version 1.1;
-        proxy_set_header Connection "";
-        proxy_cache off;
-        proxy_ssl_server_name on;
-        proxy_ssl_protocols TLSv1.2 TLSv1.3;
-        proxy_ssl_verify off;
-
-        sub_filter "https://cs8.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs4.vpstv.net/key" "https://$DOMAIN/key4";
-        sub_filter "https://cs4.vpstv.net/hls" "https://$DOMAIN/hls4";
-        sub_filter "https://cs1.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs2.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs3.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs5.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs6.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs7.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs9.vpstv.net" "https://$DOMAIN";
-        sub_filter "https://cs10.vpstv.net" "https://$DOMAIN";
-        # 为HTTPS模式添加同样的替换规则
-        sub_filter "https://cs1.vpstv.net/key" "https://$DOMAIN/key1";
-        sub_filter "https://cs1.vpstv.net/hls" "https://$DOMAIN/hls1";
-        sub_filter "https://cs2.vpstv.net/key" "https://$DOMAIN/key2";
-        sub_filter "https://cs2.vpstv.net/hls" "https://$DOMAIN/hls2";
-        sub_filter "https://cs3.vpstv.net/key" "https://$DOMAIN/key3";
-        sub_filter "https://cs3.vpstv.net/hls" "https://$DOMAIN/hls3";
-        sub_filter "https://cs4.vpstv.net/key" "https://$DOMAIN/key4";
-        sub_filter "https://cs4.vpstv.net/hls" "https://$DOMAIN/hls4";
-        sub_filter "https://cs5.vpstv.net/key" "https://$DOMAIN/key5";
-        sub_filter "https://cs5.vpstv.net/hls" "https://$DOMAIN/hls5";
-        sub_filter "https://cs6.vpstv.net/key" "https://$DOMAIN/key6";
-        sub_filter "https://cs6.vpstv.net/hls" "https://$DOMAIN/hls6";
-        sub_filter "https://cs7.vpstv.net/key" "https://$DOMAIN/key7";
-        sub_filter "https://cs7.vpstv.net/hls" "https://$DOMAIN/hls7";
-        # cs8是默认情况
-        sub_filter "https://cs9.vpstv.net/key" "https://$DOMAIN/key9";
-        sub_filter "https://cs9.vpstv.net/hls" "https://$DOMAIN/hls9";
-        sub_filter "https://cs10.vpstv.net/key" "https://$DOMAIN/key10";
-        sub_filter "https://cs10.vpstv.net/hls" "https://$DOMAIN/hls10";
-    }
-    # 替换原有的location块为完整的cs1到cs10配置
-    location ^~ /key/ { proxy_pass https://cs8.vpstv.net/key/; }
-    location ^~ /key1/ { proxy_pass https://cs1.vpstv.net/key/; }
-    location ^~ /key2/ { proxy_pass https://cs2.vpstv.net/key/; }
-    location ^~ /key3/ { proxy_pass https://cs3.vpstv.net/key/; }
-    location ^~ /key4/ { proxy_pass https://cs4.vpstv.net/key/; }
-    location ^~ /key5/ { proxy_pass https://cs5.vpstv.net/key/; }
-    location ^~ /key6/ { proxy_pass https://cs6.vpstv.net/key/; }
-    location ^~ /key7/ { proxy_pass https://cs7.vpstv.net/key/; }
-    location ^~ /key9/ { proxy_pass https://cs9.vpstv.net/key/; }
-    location ^~ /key10/ { proxy_pass https://cs10.vpstv.net/key/; }
-    
-    location ^~ /hls/ { proxy_pass https://cs8.vpstv.net/hls/; }
-    location ^~ /hls1/ { proxy_pass https://cs1.vpstv.net/hls/; }
-    location ^~ /hls2/ { proxy_pass https://cs2.vpstv.net/hls/; }
-    location ^~ /hls3/ { proxy_pass https://cs3.vpstv.net/hls/; }
-    location ^~ /hls4/ { proxy_pass https://cs4.vpstv.net/hls/; }
-    location ^~ /hls5/ { proxy_pass https://cs5.vpstv.net/hls/; }
-    location ^~ /hls6/ { proxy_pass https://cs6.vpstv.net/hls/; }
-    location ^~ /hls7/ { proxy_pass https://cs7.vpstv.net/hls/; }
-    location ^~ /hls9/ { proxy_pass https://cs9.vpstv.net/hls/; }
-    location ^~ /hls10/ { proxy_pass https://cs10.vpstv.net/hls/; }
-}
-EOF
-
-    sudo ln -sf $NGINX_CONF /etc/nginx/sites-enabled/aimi-$DOMAIN
-    sudo nginx -t
-    sudo systemctl reload nginx
-
-    sudo certbot --nginx -d $DOMAIN --non-interactive --agree-tos -m admin@$DOMAIN || {
-        echo "❌ 证书申请失败"
-        exit 1
-    }
-
-    echo "✅ 部署完成！现在可通过 https://$DOMAIN 访问。"
-else
-    echo "❌ 无效选项"
+if [[ "$mode" != "1" && "$mode" != "2" && "$mode" != "3" ]]; then
+    echo "输入错误，退出"
     exit 1
 fi
+
+# 卸载功能
+if [ "$mode" == "3" ]; then
+    echo "开始卸载..."
+    
+    # 删除Nginx配置
+    rm -f /etc/nginx/sites-available/stream_proxy
+    rm -f /etc/nginx/sites-enabled/stream_proxy
+    
+    # 恢复默认配置
+    if [ -f /etc/nginx/sites-available/default ]; then
+        ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+    fi
+    
+    # 删除SSL证书目录
+    rm -rf /etc/nginx/ssl/
+    
+    # 关闭防火墙规则
+    if command -v ufw &> /dev/null; then
+        ufw delete allow 8070/tcp 2>/dev/null || true
+        ufw delete allow 80/tcp 2>/dev/null || true
+        ufw delete allow 443/tcp 2>/dev/null || true
+    fi
+    
+    # 重启Nginx
+    systemctl restart nginx || true
+    
+    echo "=========================="
+    echo "卸载完成！"
+    echo "已删除Nginx配置和相关防火墙规则"
+    echo "=========================="
+    exit 0
+fi
+
+apt update
+apt install -y nginx curl
+
+conf_path="/etc/nginx/sites-available/stream_proxy"
+
+if [ "$mode" == "2" ]; then
+    read -p "请输入你的自定义域名(如: proxy.xxx.com): " mydomain
+    if [ -z "$mydomain" ]; then
+        echo "域名不能为空，退出"
+        exit 1
+    fi
+    cert_dir="/etc/nginx/ssl/$mydomain"
+    mkdir -p $cert_dir
+    apt install -y socat
+    curl https://get.acme.sh | sh
+    ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+    ~/.acme.sh/acme.sh --issue -d $mydomain --webroot /var/www/html
+    ~/.acme.sh/acme.sh --install-cert -d $mydomain \
+      --key-file $cert_dir/$mydomain.key \
+      --fullchain-file $cert_dir/fullchain.cer
+    ssl_config="ssl_certificate $cert_dir/fullchain.cer;
+    ssl_certificate_key $cert_dir/$mydomain.key;"
+fi
+
+# 使用变量替换方法，避免在heredoc中使用转义符
+cat > $conf_path << 'EOFNGINX'
+server {
+EOFNGINX
+
+if [ "$mode" == "1" ]; then
+    echo "    listen 8070;" >> $conf_path
+    echo "    server_name _;" >> $conf_path
+else
+    echo "    listen 80;" >> $conf_path
+    echo "    server_name $mydomain;" >> $conf_path
+fi
+
+echo "    resolver 8.8.8.8 1.1.1.1 valid=10s;" >> $conf_path
+
+if [ "$mode" == "2" ]; then
+    cat >> $conf_path << 'EOF2'
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/html;
+    }
+    location / {
+        return 301 https://$host$request_uri;
+    }
+EOF2
+else
+    cat >> $conf_path << 'EOF3'
+    # m3u8 自动 sub_filter
+    location ~ \.m3u8$ {
+        proxy_pass https://hls-gateway.vpstv.net;
+        proxy_set_header Host hls-gateway.vpstv.net;
+        proxy_ssl_server_name on;
+        proxy_ssl_name hls-gateway.vpstv.net;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+        sub_filter_once off;
+        sub_filter_types application/vnd.apple.mpegurl text/plain;
+        sub_filter "https://cs1.vpstv.net/" "/cs1.vpstv.net/";
+        sub_filter "https://cs2.vpstv.net/" "/cs2.vpstv.net/";
+        sub_filter "https://cs3.vpstv.net/" "/cs3.vpstv.net/";
+        sub_filter "https://cs4.vpstv.net/" "/cs4.vpstv.net/";
+        sub_filter "https://cs5.vpstv.net/" "/cs5.vpstv.net/";
+        sub_filter "https://cs6.vpstv.net/" "/cs6.vpstv.net/";
+        sub_filter "https://cs7.vpstv.net/" "/cs7.vpstv.net/";
+        sub_filter "https://cs8.vpstv.net/" "/cs8.vpstv.net/";
+        sub_filter "https://cs9.vpstv.net/" "/cs9.vpstv.net/";
+        sub_filter "https://cs10.vpstv.net/" "/cs10.vpstv.net/";
+    }
+    # ts/key 动态反代，支持 cs1~cs10
+    location ~ ^/(cs(10|[1-9])\.vpstv\.net)/(.*) {
+        set $upstream $1;
+        proxy_pass https://$upstream/$3;
+        proxy_set_header Host $upstream;
+        proxy_ssl_server_name on;
+        proxy_ssl_name $upstream;
+        proxy_ssl_verify off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+    }
+    # 兜底：主域名其他资源
+    location / {
+        proxy_pass https://hls-gateway.vpstv.net;
+        proxy_set_header Host hls-gateway.vpstv.net;
+        proxy_ssl_server_name on;
+        proxy_ssl_name hls-gateway.vpstv.net;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+    }
+EOF3
+fi
+
+echo "}" >> $conf_path
+
+# HTTPS 服务器配置
+if [ "$mode" == "2" ]; then
+    cat >> $conf_path << 'HTTPSSERVER'
+server {
+    listen 443 ssl http2;
+HTTPSSERVER
+
+    echo "    server_name $mydomain;" >> $conf_path
+    echo "    resolver 8.8.8.8 1.1.1.1 valid=10s;" >> $conf_path
+    echo "    $ssl_config" >> $conf_path
+
+    cat >> $conf_path << 'HTTPSCONFIG'
+    # m3u8 自动 sub_filter
+    location ~ \.m3u8$ {
+        proxy_pass https://hls-gateway.vpstv.net;
+        proxy_set_header Host hls-gateway.vpstv.net;
+        proxy_ssl_server_name on;
+        proxy_ssl_name hls-gateway.vpstv.net;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+        sub_filter_once off;
+        sub_filter_types application/vnd.apple.mpegurl text/plain;
+        sub_filter "https://cs1.vpstv.net/" "/cs1.vpstv.net/";
+        sub_filter "https://cs2.vpstv.net/" "/cs2.vpstv.net/";
+        sub_filter "https://cs3.vpstv.net/" "/cs3.vpstv.net/";
+        sub_filter "https://cs4.vpstv.net/" "/cs4.vpstv.net/";
+        sub_filter "https://cs5.vpstv.net/" "/cs5.vpstv.net/";
+        sub_filter "https://cs6.vpstv.net/" "/cs6.vpstv.net/";
+        sub_filter "https://cs7.vpstv.net/" "/cs7.vpstv.net/";
+        sub_filter "https://cs8.vpstv.net/" "/cs8.vpstv.net/";
+        sub_filter "https://cs9.vpstv.net/" "/cs9.vpstv.net/";
+        sub_filter "https://cs10.vpstv.net/" "/cs10.vpstv.net/";
+    }
+    # ts/key 动态反代，支持 cs1~cs10
+    location ~ ^/(cs(10|[1-9])\.vpstv\.net)/(.*) {
+        set $upstream $1;
+        proxy_pass https://$upstream/$3;
+        proxy_set_header Host $upstream;
+        proxy_ssl_server_name on;
+        proxy_ssl_name $upstream;
+        proxy_ssl_verify off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+    }
+    # 兜底：主域名其他资源
+    location / {
+        proxy_pass https://hls-gateway.vpstv.net;
+        proxy_set_header Host hls-gateway.vpstv.net;
+        proxy_ssl_server_name on;
+        proxy_ssl_name hls-gateway.vpstv.net;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+    }
+}
+HTTPSCONFIG
+fi
+
+ln -sf $conf_path /etc/nginx/sites-enabled/stream_proxy
+rm -f /etc/nginx/sites-enabled/default
+
+# 添加防火墙规则(如果有UFW)
+if command -v ufw &> /dev/null; then
+    if [ "$mode" == "1" ]; then
+        ufw allow 8070/tcp
+    else
+        ufw allow 80/tcp
+        ufw allow 443/tcp
+    fi
+fi
+
+nginx -t && systemctl restart nginx
+
+IP=$(curl -s ifconfig.me || curl -s ipinfo.io/ip)
+
+echo "=========================="
+if [ "$mode" == "1" ]; then
+    echo "HTTP 部署完成！"
+    echo "主入口：http://$IP:8070/"
+else
+    echo "HTTPS 部署完成！"
+fi
+echo "交流群:https://t.me/IPTV_9999999 "
+echo "作者： ！㋡ 三岁抬頭當王者🎖ᴴᴰ "
+echo "=========================="
