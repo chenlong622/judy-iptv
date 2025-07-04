@@ -3,16 +3,32 @@
 set -e
 
 # 检测系统类型
-if [ -f /etc/debian_version ]; then
+if [ -f /etc/openwrt_release ]; then
+    OS_TYPE="openwrt"
+elif [ -f /etc/debian_version ]; then
     OS_TYPE="debian"
 elif [ -f /etc/redhat-release ]; then
     OS_TYPE="centos"
 else
-    echo "不支持的系统类型！目前支持Debian/Ubuntu和CentOS系统。"
-    exit 1
+    echo "检测系统中..."
+    if command -v opkg &> /dev/null; then
+        OS_TYPE="openwrt"
+    elif grep -qi "openwrt\|lede" /proc/version &> /dev/null; then
+        OS_TYPE="openwrt"
+    elif command -v fw_printenv &> /dev/null && grep -qi "router\|wrt" /proc/cmdline &> /dev/null; then
+        OS_TYPE="openwrt"
+    else
+        echo "不支持的系统类型！目前支持Debian/Ubuntu、CentOS和X86软路由系统。"
+        exit 1
+    fi
 fi
 
-echo "检测到系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
+if [ "$OS_TYPE" == "openwrt" ]; then
+    echo "检测到系统类型: X86软路由系统 (OpenWrt)"
+else
+    echo "检测到系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
+fi
+
 echo "请选择操作："
 echo "1) 使用公网IP，自定义HTTP端口"
 echo "2) 使用自定义域名，监听80/443端口 (HTTPS)"
@@ -47,6 +63,11 @@ if [ "$OS_TYPE" == "debian" ]; then
     NGINX_SITES_AVAILABLE="/etc/nginx/sites-available"
     NGINX_SITES_ENABLED="/etc/nginx/sites-enabled"
     WEBROOT="/var/www/html"
+elif [ "$OS_TYPE" == "openwrt" ]; then
+    PKG_MANAGER="opkg"
+    NGINX_SITES_AVAILABLE="/etc/nginx/conf.d"
+    NGINX_SITES_ENABLED="/etc/nginx/conf.d"
+    WEBROOT="/www"
 else # centos
     PKG_MANAGER="$(command -v dnf >/dev/null 2>&1 && echo 'dnf' || echo 'yum')"
     NGINX_SITES_AVAILABLE="/etc/nginx/conf.d"
@@ -67,6 +88,12 @@ if [ "$mode" == "3" ]; then
         if [ -f ${NGINX_SITES_AVAILABLE}/default ]; then
             ln -sf ${NGINX_SITES_AVAILABLE}/default ${NGINX_SITES_ENABLED}/default
         fi
+    elif [ "$OS_TYPE" == "openwrt" ]; then
+        rm -f ${NGINX_SITES_AVAILABLE}/stream_proxy.conf
+        # 恢复OpenWrt默认Nginx配置
+        if [ -f ${NGINX_SITES_AVAILABLE}/default.conf.backup ]; then
+            mv ${NGINX_SITES_AVAILABLE}/default.conf.backup ${NGINX_SITES_AVAILABLE}/default.conf
+        fi
     else # centos
         rm -f ${NGINX_SITES_AVAILABLE}/stream_proxy.conf
     fi
@@ -81,6 +108,13 @@ if [ "$mode" == "3" ]; then
             ufw delete allow 80/tcp 2>/dev/null || true
             ufw delete allow 443/tcp 2>/dev/null || true
         fi
+    elif [ "$OS_TYPE" == "openwrt" ]; then
+        if command -v fw3 &> /dev/null || command -v uci &> /dev/null; then
+            # 删除防火墙规则
+            uci delete firewall.stream_proxy 2>/dev/null || true
+            uci commit firewall
+            /etc/init.d/firewall restart
+        fi
     else # centos
         if command -v firewall-cmd &> /dev/null && systemctl is-active firewalld &>/dev/null; then
             firewall-cmd --permanent --remove-port=8070/tcp 2>/dev/null || true
@@ -90,8 +124,14 @@ if [ "$mode" == "3" ]; then
         fi
     fi
     
-    # 重启Nginx
-    systemctl restart nginx || true
+    # 卸载软件包
+    if [ "$OS_TYPE" == "openwrt" ]; then
+        opkg remove nginx nginx-ssl curl socat
+        /etc/init.d/nginx stop || true
+    else
+        # 重启Nginx
+        systemctl restart nginx || true
+    fi
     
     echo "=========================="
     echo "卸载完成！"
@@ -104,6 +144,22 @@ fi
 if [ "$OS_TYPE" == "debian" ]; then
     apt update
     apt install -y nginx curl
+elif [ "$OS_TYPE" == "openwrt" ]; then
+    opkg update
+    opkg install nginx curl
+    
+    # 确保需要的目录存在
+    mkdir -p ${NGINX_SITES_AVAILABLE}
+    mkdir -p $WEBROOT
+    
+    # 备份默认配置
+    if [ -f ${NGINX_SITES_AVAILABLE}/default.conf ] && [ ! -f ${NGINX_SITES_AVAILABLE}/default.conf.backup ]; then
+        cp ${NGINX_SITES_AVAILABLE}/default.conf ${NGINX_SITES_AVAILABLE}/default.conf.backup
+    fi
+    
+    # 启用Nginx服务
+    /etc/init.d/nginx enable
+    /etc/init.d/nginx start || echo "警告：nginx服务启动失败，将在配置完成后再次尝试启动"
 else # centos
     # 安装EPEL仓库
     $PKG_MANAGER install -y epel-release
@@ -139,7 +195,7 @@ fi
 # 设置配置文件路径
 if [ "$OS_TYPE" == "debian" ]; then
     conf_path="${NGINX_SITES_AVAILABLE}/stream_proxy"
-else # centos
+else # centos 或 openwrt
     conf_path="${NGINX_SITES_AVAILABLE}/stream_proxy.conf"
 fi
 
@@ -154,6 +210,8 @@ if [ "$mode" == "2" ]; then
     
     if [ "$OS_TYPE" == "debian" ]; then
         apt install -y socat
+    elif [ "$OS_TYPE" == "openwrt" ]; then
+        opkg install socat
     else # centos
         $PKG_MANAGER install -y socat
     fi
@@ -193,8 +251,8 @@ if [ "$mode" == "2" ]; then
     }
 EOF2
 
-    # 针对CentOS调整acme-challenge目录
-    if [ "$OS_TYPE" == "centos" ]; then
+    # 针对CentOS和OpenWrt调整acme-challenge目录
+    if [ "$OS_TYPE" == "centos" ] || [ "$OS_TYPE" == "openwrt" ]; then
         sed -i "s|root /var/www/html;|root $WEBROOT;|" $conf_path
     fi
 else
@@ -312,6 +370,12 @@ fi
 if [ "$OS_TYPE" == "debian" ]; then
     ln -sf $conf_path ${NGINX_SITES_ENABLED}/stream_proxy
     rm -f ${NGINX_SITES_ENABLED}/default
+elif [ "$OS_TYPE" == "openwrt" ]; then
+    # OpenWrt没有额外的符号链接需求
+    # 但可能需要删除默认配置
+    if [ -f /etc/nginx/conf.d/default.conf ]; then
+        mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
+    fi
 else # centos
     # CentOS下可能需要备份默认配置
     if [ -f /etc/nginx/conf.d/default.conf ]; then
@@ -337,6 +401,48 @@ if [ "$OS_TYPE" == "debian" ]; then
             ufw allow 443/tcp
         fi
     fi
+elif [ "$OS_TYPE" == "openwrt" ]; then
+    # OpenWrt防火墙配置
+    if command -v uci &> /dev/null; then
+        echo "配置OpenWrt防火墙规则..."
+        if [ "$mode" == "1" ]; then
+            # 删除可能存在的旧规则
+            uci delete firewall.stream_proxy 2>/dev/null || true
+            
+            # 添加新规则
+            uci set firewall.stream_proxy=rule
+            uci set firewall.stream_proxy.name='Stream Proxy'
+            uci set firewall.stream_proxy.target='ACCEPT'
+            uci set firewall.stream_proxy.src='wan'
+            uci set firewall.stream_proxy.proto='tcp'
+            uci set firewall.stream_proxy.dest_port="$CUSTOM_PORT"
+            uci commit firewall
+            /etc/init.d/firewall restart
+        else
+            # 删除可能存在的旧规则
+            uci delete firewall.stream_proxy_http 2>/dev/null || true
+            uci delete firewall.stream_proxy_https 2>/dev/null || true
+            
+            # 添加新规则 - HTTP
+            uci set firewall.stream_proxy_http=rule
+            uci set firewall.stream_proxy_http.name='Stream Proxy HTTP'
+            uci set firewall.stream_proxy_http.target='ACCEPT'
+            uci set firewall.stream_proxy_http.src='wan'
+            uci set firewall.stream_proxy_http.proto='tcp'
+            uci set firewall.stream_proxy_http.dest_port='80'
+            
+            # 添加新规则 - HTTPS
+            uci set firewall.stream_proxy_https=rule
+            uci set firewall.stream_proxy_https.name='Stream Proxy HTTPS'
+            uci set firewall.stream_proxy_https.target='ACCEPT'
+            uci set firewall.stream_proxy_https.src='wan'
+            uci set firewall.stream_proxy_https.proto='tcp'
+            uci set firewall.stream_proxy_https.dest_port='443'
+            
+            uci commit firewall
+            /etc/init.d/firewall restart
+        fi
+    fi
 else # centos
     if command -v firewall-cmd &> /dev/null && systemctl is-active firewalld &>/dev/null; then
         if [ "$mode" == "1" ]; then
@@ -350,21 +456,37 @@ else # centos
 fi
 
 # 检查配置并重启服务
-nginx -t
-systemctl restart nginx || {
-    echo "Nginx启动失败，请检查错误日志："
-    journalctl -xe --unit=nginx
-}
+if [ "$OS_TYPE" == "openwrt" ]; then
+    nginx -t && /etc/init.d/nginx restart || {
+        echo "Nginx启动失败，请检查错误日志"
+    }
+else
+    nginx -t
+    systemctl restart nginx || {
+        echo "Nginx启动失败，请检查错误日志："
+        journalctl -xe --unit=nginx
+    }
+fi
 
-IP=$(curl -s ifconfig.me || curl -s ipinfo.io/ip)
+# 获取公网IP
+IP=$(curl -s ifconfig.me || curl -s ipinfo.io/ip || curl -s ip.sb)
 
 echo "=========================="
-echo "系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
+if [ "$OS_TYPE" == "openwrt" ]; then
+    echo "系统类型: X86软路由系统 (OpenWrt)"
+else
+    echo "系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
+fi
+
 if [ "$mode" == "1" ]; then
     echo "HTTP 部署完成！"
     echo "主入口：http://$IP:$CUSTOM_PORT/"
 else
     echo "HTTPS 部署完成！"
+    if [ ! -z "$mydomain" ]; then
+        echo "请确保您的域名 $mydomain 已正确解析到此服务器IP: $IP"
+        echo "访问地址: https://$mydomain/"
+    fi
 fi
 echo "交流群:https://t.me/IPTV_9999999 "
 echo "作者： ！㋡ 三岁抬頭當王者🎖ᴴᴰ "
