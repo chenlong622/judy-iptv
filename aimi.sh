@@ -143,7 +143,7 @@ fi
 # 安装依赖
 if [ "$OS_TYPE" == "debian" ]; then
     apt update
-    apt install -y nginx curl
+    apt install -y nginx curl dnsutils
 elif [ "$OS_TYPE" == "openwrt" ]; then
     opkg update
     opkg install nginx curl
@@ -181,7 +181,7 @@ else # centos
     
     # 安装Nginx和curl
     $PKG_MANAGER update
-    $PKG_MANAGER install -y nginx curl
+    $PKG_MANAGER install -y nginx curl bind-utils
     
     # 确保nginx目录存在
     mkdir -p ${NGINX_SITES_AVAILABLE}
@@ -195,8 +195,16 @@ fi
 # 设置配置文件路径
 if [ "$OS_TYPE" == "debian" ]; then
     conf_path="${NGINX_SITES_AVAILABLE}/stream_proxy"
+    if [ "$mode" == "1" ]; then
+        # 为模式1创建单独的配置文件，区别于模式2
+        conf_path="${NGINX_SITES_AVAILABLE}/aimi-ip$CUSTOM_PORT"
+    fi
 else # centos 或 openwrt
     conf_path="${NGINX_SITES_AVAILABLE}/stream_proxy.conf"
+    if [ "$mode" == "1" ]; then
+        # 为模式1创建单独的配置文件，区别于模式2
+        conf_path="${NGINX_SITES_AVAILABLE}/aimi-ip$CUSTOM_PORT.conf"
+    fi
 fi
 
 if [ "$mode" == "2" ]; then
@@ -239,7 +247,9 @@ else
     echo "    server_name $mydomain;" >> $conf_path
 fi
 
-echo "    resolver 8.8.8.8 1.1.1.1 valid=10s;" >> $conf_path
+# 增强resolver配置，提高DNS解析成功率
+echo "    resolver 8.8.8.8 8.8.4.4 1.1.1.1 114.114.114.114 223.5.5.5 valid=60s ipv6=off;" >> $conf_path
+echo "    resolver_timeout 10s;" >> $conf_path
 
 if [ "$mode" == "2" ]; then
     cat >> $conf_path << 'EOF2'
@@ -266,6 +276,9 @@ else
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_buffering off;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
         sub_filter_once off;
         sub_filter_types application/vnd.apple.mpegurl text/plain;
         sub_filter "https://cs1.vpstv.net/" "/cs1.vpstv.net/";
@@ -279,6 +292,7 @@ else
         sub_filter "https://cs9.vpstv.net/" "/cs9.vpstv.net/";
         sub_filter "https://cs10.vpstv.net/" "/cs10.vpstv.net/";
     }
+    
     # ts/key 动态反代，支持 cs1~cs10
     location ~ ^/(cs(10|[1-9])\.vpstv\.net)/(.*) {
         set $upstream $1;
@@ -290,7 +304,11 @@ else
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_buffering off;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
     }
+    
     # 兜底：主域名其他资源
     location / {
         proxy_pass https://hls-gateway.vpstv.net;
@@ -300,13 +318,16 @@ else
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_buffering off;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
     }
 EOF3
 fi
 
 echo "}" >> $conf_path
 
-# HTTPS 服务器配置
+# HTTPS 服务器配置 (模式2)
 if [ "$mode" == "2" ]; then
     cat >> $conf_path << 'HTTPSSERVER'
 server {
@@ -368,8 +389,16 @@ fi
 
 # 根据系统类型处理nginx配置
 if [ "$OS_TYPE" == "debian" ]; then
-    ln -sf $conf_path ${NGINX_SITES_ENABLED}/stream_proxy
-    rm -f ${NGINX_SITES_ENABLED}/default
+    # 为模式1创建符号链接
+    if [ "$mode" == "1" ]; then
+        ln -sf $conf_path ${NGINX_SITES_ENABLED}/aimi-ip$CUSTOM_PORT
+        # 确保删除可能冲突的默认配置
+        rm -f ${NGINX_SITES_ENABLED}/default
+        rm -f ${NGINX_SITES_ENABLED}/stream_proxy
+    else
+        ln -sf $conf_path ${NGINX_SITES_ENABLED}/stream_proxy
+        rm -f ${NGINX_SITES_ENABLED}/default
+    fi
 elif [ "$OS_TYPE" == "openwrt" ]; then
     # OpenWrt没有额外的符号链接需求
     # 但可能需要删除默认配置
@@ -381,6 +410,32 @@ else # centos
     if [ -f /etc/nginx/conf.d/default.conf ]; then
         mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
     fi
+fi
+
+# 创建用于测试连接的简单页面
+echo "<html><body><h1>反向代理测试页面</h1><p>如果您看到此页面，说明Nginx服务器已成功安装并运行</p></body></html>" > $WEBROOT/index.html
+
+# 安装其他可能需要的包
+if [ "$OS_TYPE" == "debian" ]; then
+    apt install -y ca-certificates openssl
+elif [ "$OS_TYPE" == "openwrt" ]; then
+    opkg install ca-certificates openssl-util libustream-openssl
+else # centos
+    $PKG_MANAGER install -y ca-certificates openssl
+fi
+
+# 预先测试DNS解析
+echo "测试DNS解析..."
+if command -v dig &> /dev/null; then
+    echo "使用dig测试DNS解析:"
+    dig +short hls-gateway.vpstv.net
+    dig +short cs1.vpstv.net
+    dig +short cs2.vpstv.net
+elif command -v nslookup &> /dev/null; then
+    echo "使用nslookup测试DNS解析:"
+    nslookup hls-gateway.vpstv.net
+    nslookup cs1.vpstv.net
+    nslookup cs2.vpstv.net
 fi
 
 # SELinux处理（CentOS特有）
@@ -456,15 +511,22 @@ else # centos
 fi
 
 # 检查配置并重启服务
+echo "检查Nginx配置..."
 if [ "$OS_TYPE" == "openwrt" ]; then
     nginx -t && /etc/init.d/nginx restart || {
-        echo "Nginx启动失败，请检查错误日志"
+        echo "Nginx配置测试失败，请检查错误并手动修复..."
+        echo "尝试继续启动..."
+        /etc/init.d/nginx restart
     }
 else
-    nginx -t
-    systemctl restart nginx || {
-        echo "Nginx启动失败，请检查错误日志："
-        journalctl -xe --unit=nginx
+    nginx -t && {
+        systemctl restart nginx || {
+            echo "Nginx配置测试通过但启动失败，尝试修复..."
+            sleep 2
+            systemctl restart nginx
+        }
+    } || {
+        echo "Nginx配置测试失败，请检查错误并手动修复..."
     }
 fi
 
