@@ -14,7 +14,7 @@ fi
 
 echo "检测到系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
 echo "请选择操作："
-echo "1) 使用公网IP，监听8070端口 (HTTP)"
+echo "1) 使用公网IP，自定义HTTP端口"
 echo "2) 使用自定义域名，监听80/443端口 (HTTPS)"
 echo "3) 卸载所有安装内容"
 read -p "请输入数字(1、2或3): " mode
@@ -22,6 +22,23 @@ read -p "请输入数字(1、2或3): " mode
 if [[ "$mode" != "1" && "$mode" != "2" && "$mode" != "3" ]]; then
     echo "输入错误，退出"
     exit 1
+fi
+
+# 自定义端口变量
+CUSTOM_PORT=8070
+
+# 如果选择模式1，则询问用户自定义端口
+if [ "$mode" == "1" ]; then
+    read -p "请输入要使用的HTTP端口号 [默认: 8070]: " port_input
+    if [ ! -z "$port_input" ]; then
+        # 验证输入是否为有效端口号
+        if [[ "$port_input" =~ ^[0-9]+$ ]] && [ "$port_input" -ge 1 ] && [ "$port_input" -le 65535 ]; then
+            CUSTOM_PORT=$port_input
+        else
+            echo "无效的端口号，使用默认端口8070"
+        fi
+    fi
+    echo "将使用端口: $CUSTOM_PORT"
 fi
 
 # 根据系统类型设置路径和命令
@@ -157,7 +174,7 @@ server {
 EOFNGINX
 
 if [ "$mode" == "1" ]; then
-    echo "    listen 8070;" >> $conf_path
+    echo "    listen $CUSTOM_PORT;" >> $conf_path
     echo "    server_name _;" >> $conf_path
 else
     echo "    listen 80;" >> $conf_path
@@ -314,7 +331,7 @@ fi
 if [ "$OS_TYPE" == "debian" ]; then
     if command -v ufw &> /dev/null; then
         if [ "$mode" == "1" ]; then
-            ufw allow 8070/tcp
+            ufw allow $CUSTOM_PORT/tcp
         else
             ufw allow 80/tcp
             ufw allow 443/tcp
@@ -323,7 +340,7 @@ if [ "$OS_TYPE" == "debian" ]; then
 else # centos
     if command -v firewall-cmd &> /dev/null && systemctl is-active firewalld &>/dev/null; then
         if [ "$mode" == "1" ]; then
-            firewall-cmd --permanent --add-port=8070/tcp
+            firewall-cmd --permanent --add-port=$CUSTOM_PORT/tcp
         else
             firewall-cmd --permanent --add-port=80/tcp
             firewall-cmd --permanent --add-port=443/tcp
@@ -345,7 +362,7 @@ echo "=========================="
 echo "系统类型: $([ "$OS_TYPE" == "debian" ] && echo "Debian/Ubuntu" || echo "CentOS")"
 if [ "$mode" == "1" ]; then
     echo "HTTP 部署完成！"
-    echo "主入口：http://$IP:8070/"
+    echo "主入口：http://$IP:$CUSTOM_PORT/"
 else
     echo "HTTPS 部署完成！"
 fi
