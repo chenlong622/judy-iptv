@@ -276,9 +276,6 @@ else
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_buffering off;
-        proxy_connect_timeout 60s;
-        proxy_read_timeout 60s;
-        proxy_send_timeout 60s;
         sub_filter_once off;
         sub_filter_types application/vnd.apple.mpegurl text/plain;
         sub_filter "https://cs1.vpstv.net/" "/cs1.vpstv.net/";
@@ -291,6 +288,21 @@ else
         sub_filter "https://cs8.vpstv.net/" "/cs8.vpstv.net/";
         sub_filter "https://cs9.vpstv.net/" "/cs9.vpstv.net/";
         sub_filter "https://cs10.vpstv.net/" "/cs10.vpstv.net/";
+    }
+    
+    # 添加对 streams/*.m3u8 格式的支持
+    location ~ ^/streams/.*\.m3u8$ {
+        proxy_pass https://hls-gateway.vpstv.net;
+        proxy_set_header Host hls-gateway.vpstv.net;
+        proxy_ssl_server_name on;
+        proxy_ssl_name hls-gateway.vpstv.net;
+        proxy_ssl_verify off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
     }
     
     # ts/key 动态反代，支持 cs1~cs10
@@ -361,6 +373,22 @@ HTTPSSERVER
         sub_filter "https://cs9.vpstv.net/" "/cs9.vpstv.net/";
         sub_filter "https://cs10.vpstv.net/" "/cs10.vpstv.net/";
     }
+    
+    # 添加对 streams/*.m3u8 格式的支持
+    location ~ ^/streams/.*\.m3u8$ {
+        proxy_pass https://hls-gateway.vpstv.net;
+        proxy_set_header Host hls-gateway.vpstv.net;
+        proxy_ssl_server_name on;
+        proxy_ssl_name hls-gateway.vpstv.net;
+        proxy_ssl_verify off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+    }
+    
     # ts/key 动态反代，支持 cs1~cs10
     location ~ ^/(cs(10|[1-9])\.vpstv\.net)/(.*) {
         set $upstream $1;
