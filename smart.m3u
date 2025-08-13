@@ -1,5 +1,364 @@
 #EXTM3U
 #EXTM3U x-tvg-url="https://bit.ly/a1xepg,https://epg.catvod.com/epg.xml"
+
+#EXTINF:-1 tvg-id="翡翠台" tvg-name="翡翠台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/翡翠.png" group-title="AKTV",翡翠台
+https://aktv.946985.qzz.io/aktv/CH-0/AKTV.m3u8
+#EXTINF:-1 tvg-id="明珠台" tvg-name="明珠台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/明珠.png" group-title="AKTV",明珠台
+https://aktv.946985.qzz.io/aktv/CH-2/AKTV.m3u8
+#EXTINF:-1 tvg-id="无线新闻台" tvg-name="无线新闻台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/无线新闻.png" group-title="AKTV",无线新闻台
+https://aktv.946985.qzz.io/aktv/CH-1/AKTV.m3u8
+#EXTINF:-1 tvg-id="TVB Plus" tvg-name="TVB PLUS" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TVBPLUS.png" group-title="AKTV",TVB Plus
+https://aktv.946985.qzz.io/aktv/tvbplus/AKTV.m3u8
+#EXTINF:-1 tvg-id="RTHK32" tvg-name="TV 32" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/RTHK32.png" group-title="AKTV",RTHK32
+https://aktv.946985.qzz.io/aktv3/rthk32/AKTV.m3u8
+#EXTINF:-1 tvg-id="鳳凰衛視中文台" tvg-name="凤凰卫视中文台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰卫视中文.png" group-title="AKTV",鳳凰衛視中文台
+https://aktv.946985.qzz.io/aktv/CH-3/AKTV.m3u8
+#EXTINF:-1 tvg-id="鳳凰衛視資訊台" tvg-name="凤凰卫视资讯台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰卫视资讯.png" group-title="AKTV",鳳凰衛視資訊台
+https://aktv.946985.qzz.io/aktv/CH-4/AKTV.m3u8
+#EXTINF:-1 tvg-id="鳳凰衛視香港台" tvg-name="凤凰卫视香港台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰卫视香港.png" group-title="AKTV",鳳凰衛視香港台
+https://aktv.946985.qzz.io/aktv/CH-5/AKTV.m3u8
+#EXTINF:-1 tvg-id="明珠剧集台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/明珠.png" group-title="AKTV",明珠剧集台
+https://aktv.946985.qzz.io/aktv/CH-19/AKTV.m3u8
+#EXTINF:-1 tvg-id="美亞電影台" tvg-name="美亚电影台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/美亚电影.png" group-title="AKTV",美亞電影台
+https://aktv.946985.qzz.io/aktv/hk/AKTV.m3u8
+#EXTINF:-1 tvg-id="黃金翡翠台" tvg-name="黄金翡翠台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/黄金翡翠.png" group-title="AKTV",黃金翡翠台
+https://aktv.946985.qzz.io/aktv/CH-6/AKTV.m3u8
+#EXTINF:-1 tvg-id="TVB星河" tvg-name="TVB星河" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TVB星河.png" group-title="AKTV",TVB星河
+https://aktv.946985.qzz.io/taiwan2/tvb/AKTV.m3u8
+#EXTINF:-1 tvg-id="天映經典" tvg-name="天映经典频道" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天映经典.png" group-title="AKTV",天映經典
+https://aktv.946985.qzz.io/aktv/1080/AKTV.m3u8
+#EXTINF:-1 tvg-id="天映电影" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天映.png" group-title="AKTV",天映电影
+https://aktv.946985.qzz.io/aktv2/CH-3/AKTV.m3u8
+#EXTINF:-1 tvg-id="好萊塢電影台" tvg-name="好莱坞电影台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/好莱坞电影.png" group-title="AKTV",好萊塢電影台
+https://aktv.946985.qzz.io/aktv2/CH-1/AKTV.m3u8
+#EXTINF:-1 tvg-id="東森洋片" tvg-name="东森洋片台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东森洋片.png" group-title="AKTV",東森洋片
+https://aktv.946985.qzz.io/aktv2/CH-2/AKTV.m3u8
+#EXTINF:-1 tvg-id="PopC" tvg-name="POPC" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/POPC.png" group-title="AKTV",PopC
+https://aktv.946985.qzz.io/aktv/popc/AKTV.m3u8
+#EXTINF:-1 tvg-id="ROCK Action" tvg-name="ROCK ACTION" group-title="AKTV",ROCK Action
+https://aktv.946985.qzz.io/aktv/rockaction/AKTV.m3u8
+#EXTINF:-1 tvg-id="CinemaWorld" tvg-name="CINEMAWORLD" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CINEMAWORLD.png" group-title="AKTV",CinemaWorld
+https://aktv.946985.qzz.io/taiwan/cinemaworld/AKTV.m3u8
+#EXTINF:-1 tvg-id="Love Nature HD" tvg-name="LOVE NATURE HD" group-title="AKTV",Love Nature HD
+https://aktv.946985.qzz.io/aktv/lovenaturehd/AKTV.m3u8
+#EXTINF:-1 tvg-id="中天亚洲台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中天亚洲.png" group-title="AKTV",中天亚洲台
+https://aktv.946985.qzz.io/astro/CH-1/AKTV.m3u8
+#EXTINF:-1 tvg-id="TVBS" tvg-name="TVBS" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TVBS.png" group-title="AKTV",TVBS
+https://aktv.946985.qzz.io/taiwan/tvbs/AKTV.m3u8
+#EXTINF:-1 tvg-id="TVBS新聞" tvg-name="TVBS新闻" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TVBS新闻.png" group-title="AKTV",TVBS新聞
+https://aktv.946985.qzz.io/taiwan/tvbs-1/AKTV.m3u8
+#EXTINF:-1 tvg-id="民視" tvg-name="民视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/民视.png" group-title="AKTV",民視
+https://aktv.946985.qzz.io/taiwan/CH-1/AKTV.m3u8
+#EXTINF:-1 tvg-id="民視第一台" tvg-name="民视第一台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/民视第一.png" group-title="AKTV",民視第一台
+https://aktv.946985.qzz.io/taiwan/CH-0/AKTV.m3u8
+#EXTINF:-1 tvg-id="中天新闻台" tvg-name="中天新闻台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中天新闻.png" group-title="AKTV",中天新闻台
+https://aktv.946985.qzz.io/zhongtian/CH-0/AKTV.m3u8
+#EXTINF:-1 tvg-id="東森新聞" tvg-name="东森新闻" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东森新闻.png" group-title="AKTV",東森新聞
+https://aktv.946985.qzz.io/zhongtian/CH-1/AKTV.m3u8
+#EXTINF:-1 tvg-id="龍華日韓台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/龙华日韩.png" group-title="AKTV",龍華日韓台
+https://aktv.946985.qzz.io/taiwan/CH-5/AKTV.m3u8
+#EXTINF:-1 tvg-id="靖天國際台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/靖天国际.png" group-title="AKTV",靖天國際台
+https://aktv.946985.qzz.io/taiwan/CH-3/AKTV.m3u8
+#EXTINF:-1 tvg-id="緯來體育台" tvg-name="纬来体育台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/纬来体育.png" group-title="AKTV",緯來體育台
+https://aktv.946985.qzz.io/aktv2/CH-0/AKTV.m3u8
+#EXTINF:-1 tvg-id="Astro Football" group-title="AKTV",Astro Football
+https://aktv.946985.qzz.io/astro/CH-0/AKTV.m3u8
+#EXTINF:-1 tvg-id="Astro Sport UHD" group-title="AKTV",Astro Sport UHD
+https://aktv.946985.qzz.io/astro/astrosportuhd/AKTV.m3u8
+#EXTINF:-1 tvg-id="Sky Sports F1" group-title="AKTV",Sky Sports F1
+https://aktv.946985.qzz.io/aktv2/skysportsf1/AKTV.m3u8
+#EXTINF:-1 tvg-id="EuroSport 1" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/EUROSPORT.png" group-title="AKTV",EuroSport 1
+https://aktv.946985.qzz.io/astro/eurosport1/AKTV.m3u8
+#EXTINF:-1 tvg-id="EuroSport 2" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/EUROSPORT.png" group-title="AKTV",EuroSport 2
+https://aktv.946985.qzz.io/astro/eurosport2/AKTV.m3u8
+#EXTINF:-1 tvg-id="TNT SPORTS 1" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TNT.png" group-title="AKTV",TNT SPORTS 1
+https://aktv.946985.qzz.io/astro/tntsports1/AKTV.m3u8
+#EXTINF:-1 tvg-id="TNT SPORTS 2" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TNT.png" group-title="AKTV",TNT SPORTS 2
+https://aktv.946985.qzz.io/astro/tntsports2/AKTV.m3u8
+#EXTINF:-1 tvg-id="TNT SPORTS 3" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TNT.png" group-title="AKTV",TNT SPORTS 3
+https://aktv.946985.qzz.io/astro/tntsports3/AKTV.m3u8
+#EXTINF:-1 tvg-id="Channel 5 HD" group-title="AKTV",Channel 5 HD
+https://aktv.946985.qzz.io/aktv/channel5hd/AKTV.m3u8
+#EXTINF:-1 tvg-id="Channel 8 HD" group-title="AKTV",Channel 8 HD
+https://aktv.946985.qzz.io/aktv/channel8hd/AKTV.m3u8
+#EXTINF:-1 tvg-id="Channel U HD" group-title="AKTV",Channel U HD
+https://aktv.946985.qzz.io/aktv/channeluhd/AKTV.m3u8
+#EXTINF:-1 tvg-id="MagellanTV" tvg-name="MAGELLANTV频道 (麦哲伦频道) " group-title="AKTV",MagellanTV
+https://aktv.946985.qzz.io/taiwan/magellantv/AKTV.m3u8
+#EXTINF:-1 tvg-id="HITS" tvg-name="HITS" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/HITS.png" group-title="AKTV",HITS
+https://aktv.946985.qzz.io/taiwan/hits/AKTV.m3u8
+#EXTINF:-1 tvg-id="AXN" tvg-name="AXN" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/AXN.png" group-title="AKTV",AXN
+https://aktv.946985.qzz.io/aktv/axn/AKTV.m3u8
+#EXTINF:-1 tvg-id="tvN" tvg-name="TVN" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/TVN.png" group-title="AKTV",tvN
+https://aktv.946985.qzz.io/aktv/tvn/AKTV.m3u8
+#EXTINF:-1 tvg-id="CNA" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CNA.png" group-title="AKTV",CNA
+https://aktv.946985.qzz.io/aktv3/cna/AKTV.m3u8
+#EXTINF:-1 tvg-id="8TV" group-title="AKTV",8TV
+https://aktv.946985.qzz.io/astro/8tv/AKTV.m3u8
+#EXTINF:-1 tvg-id="Japan News 24H LIVE" group-title="AKTV",Japan News 24H LIVE
+https://aktv.946985.qzz.io/aktvjp/japannews24hlive/AKTV.m3u8
+#EXTINF:-1 tvg-id="日テレNEWS LIVE" group-title="AKTV",日テレNEWS LIVE
+https://aktv.946985.qzz.io/aktvjp/ntv/AKTV.m3u8
+#EXTINF:-1 tvg-id="朝鲜恩情台" group-title="AKTV",朝鲜恩情台
+https://aktv.946985.qzz.io/aktv3/CH-0/AKTV.m3u8
+
+
+
+
+
+
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/vo-nnv-vm-da3-o-hqr-d-tqs-l-h-v-bq-bai-v-t-hc-i-l09-z3-t-rs-z.png"group-title="beesport",TNT SPORTS 1
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_1
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/vo-nnv-vm-da3-o-hqr-d-tqs-l-h-v-bq-bai-v-t-hc-i-l09-z3-t-rs-z.png"group-title="beesport",TNT SPORTS 1
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_1_BU
+
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/s1-n-k-n3-b-sj-q-mam9-f-xn-w-g-rfo-q-o-ngb-pqypaz-ub5tj11.png"group-title="beesport",TNT SPORTS 2
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_2
+
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/s1-n-k-n3-b-sj-q-mam9-f-xn-w-g-rfo-q-o-ngb-pqypaz-ub5tj11.png"group-title="beesport",TNT SPORTS 2
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_2_BU
+
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 3" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/a-i-r-x-l3-u2ut-d2-zn-foo9-k-u-h-a-duh-a-s-w-e-f-p-p-qrdm-v-v-x-c.png"group-title="beesport",TNT SPORTS 3
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_3
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 3" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/a-i-r-x-l3-u2ut-d2-zn-foo9-k-u-h-a-duh-a-s-w-e-f-p-p-qrdm-v-v-x-c.png"group-title="beesport",TNT SPORTS 3
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_3_BU
+
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 4" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/lj-ogkw86c-j-n-i-wrvumds70-l5z7xa-d9-s-q-kg-gg-s-xy-qh.png"group-title="beesport",TNT SPORTS 4
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_4
+#EXTINF:-1 tvg-id="" tvg-name="TNT SPORTS 4" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/lj-ogkw86c-j-n-i-wrvumds70-l5z7xa-d9-s-q-kg-gg-s-xy-qh.png"group-title="beesport",TNT SPORTS 4
+https://smart.pendy.dpdns.org/bee.php?id=TNT_Sports_4_BU
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS FOOTBALL" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/k-v-dh-zp-i-qa-alh-lgx1-jpu-y-y-q-m-t-c4-o7-fi7-rc-fcqz-uup.png"group-title="beesport",SKY SPORTS FOOTBALL
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Football_BU
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS FOOTBALL" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/k-v-dh-zp-i-qa-alh-lgx1-jpu-y-y-q-m-t-c4-o7-fi7-rc-fcqz-uup.png"group-title="beesport",SKY SPORTS FOOTBALL
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Football_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS MAIN EVENT" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/8-a1o6-z1-vb-a-dve-w2-xa-c-kb9-odz-hewz-yl0-w-p-c-l-hcr7p.png"group-title="beesport",SKY SPORTS MAIN EVENT
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Main_Event
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS MAIN EVENT" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/8-a1o6-z1-vb-a-dve-w2-xa-c-kb9-odz-hewz-yl0-w-p-c-l-hcr7p.png"group-title="beesport",SKY SPORTS MAIN EVENT
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Main_Event_BU
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS PREMIER LEAGUE" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/9e-er-o-p5-u-cxgq-vhw-xrj8-c0-j-er6h-p-u6-d-ee-uc-yo-p761.svg"group-title="beesport",SKY SPORTS PREMIER LEAGUE
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Premier_League
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS PREMIER LEAGUE" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/9e-er-o-p5-u-cxgq-vhw-xrj8-c0-j-er6h-p-u6-d-ee-uc-yo-p761.svg"group-title="beesport",SKY SPORTS PREMIER LEAGUE
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Premier_League_BU
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS ACTION" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/3-hl2ds-ifq-s-mo-i-d-d-r-z-q-oft-sq-u5n2-fv-qmk-s8y-d9czb.png"group-title="beesport",SKY SPORTS ACTION
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Action_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS MIX" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/la-fw-h-oy-u5-i1-f-x1-i-s-d-v-s-bxs-a-so-n85-sjiw8-ql-igz-w-f.png"group-title="beesport",SKY SPORTS MIX
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Mix_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS ARENA" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/l-gy5-lwm-a-tg-hek2-f-hb8l-ff-km-z-l-i8-ww-z-pf-iuw3ts-jd.png"group-title="beesport",SKY SPORTS ARENA
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Arena_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS NEWS" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/a-g7y-pm-t-wijfcn-w9u00x1-v-wr-x-pgbgdsi-b1ixvdx-p-m.png"group-title="beesport",SKY SPORTS NEWS
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_News_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS CRICKET" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/o-k37-cj0-vvsn-xq1-p-hph-x-s-a-nw4-awo-e-qai-m-b-is-u-l-ntx.png"group-title="beesport",SKY SPORTS CRICKET
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Cricket_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Sky Sports Tennis" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/k-ww-c-i-q-eb-f-xu-e-xi-fkjo56ya-oi-g-hm-j8-d-dz-cezx8279.png"group-title="beesport",Sky Sports Tennis
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Tennis
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS F1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/i-u-rj7vj-y-h5-u-b-chr2-s-bdjm-qp-o8-a-k-obc-c94kh-fv-r-kk.png"group-title="beesport",SKY SPORTS F1
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_F1_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS GOLF" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/n-o-wzh-xjqvb-qs-txqgd3s-u-n-ft-u-s-a7-x-s-p-hfh4da1tgy.png"group-title="beesport",SKY SPORTS GOLF
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Golf_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SKY SPORTS RACING" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/kfl5-li-lg-c2-z-a-wz-as136l9v9u-jl-i-r-xa-s-ofco-y-k-h-b8.png"group-title="beesport",SKY SPORTS RACING
+https://smart.pendy.dpdns.org/bee.php?id=Sky_Sports_Racing_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="BEIN SPORTS USA" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/nlt-ev-a9qj-h-qa-hh-x1-n-mx-yg-iyriul-rmt-qz-b-a-jcxg9-p.png"group-title="beesport",BEIN SPORTS USA
+https://smart.pendy.dpdns.org/bee.php?id=Bein_Sports_USA_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="TENNIS CHANNEL" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/94bbab25-acbc-4e62-9468-39038ac16f92-tc_og.png"group-title="beesport",TENNIS CHANNEL
+https://smart.pendy.dpdns.org/bee.php?id=Tennis_Channel_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="LALIGA TV HD" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/g-e46rp-x-a-j-o-cxma-gth2-ovp5sf-az-g4p-eq-v-vlyost-q-l.png"group-title="beesport",LALIGA TV HD
+https://smart.pendy.dpdns.org/bee.php?id=La_Liga_TV_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="HBO 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/r-d9d247-s1-q-wg-g-lcg-c-g-ps2r-s-t6024f-l-ak-eld-h-e-m-tn.png"group-title="beesport",HBO 1
+https://smart.pendy.dpdns.org/bee.php?id=HBO_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="HBO 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/5-tj1j-wtmcg-o-zj-egka-yk-s-x-p-puqfj03x0w-ka-b-rwcy-o.png"group-title="beesport",HBO 2
+https://smart.pendy.dpdns.org/bee.php?id=HBO_2_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Discovery Channel" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/euzl-x-u-j-t8dx9s-puq8-hh5-g-m-rlmzu-sek-cn1ra-g-g-my2.png"group-title="beesport",Discovery Channel
+https://smart.pendy.dpdns.org/bee.php?id=Discovery_Channel_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Discovery Life" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/152-b-g-b-ja-rg9je-jt-nw8-xm7-en-g-uayb-i-u-x-mjc5od5d5.png"group-title="beesport",Discovery Life
+https://smart.pendy.dpdns.org/bee.php?id=Discovery_Life_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Cinemax West" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/waj-k6-w-wwz-x-np7-h573-ir-p-sj-x-ewjdwmvri-bfz-aimc1.png"group-title="beesport",Cinemax West
+https://smart.pendy.dpdns.org/bee.php?id=Cinemax_West_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Great Movies" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/f-r-yjt-u-b-a-hk-q-tvi-dbq-n5q-n7-a-a-rd0gxv-f-ks-l-j6-yml-s.png"group-title="beesport",Great Movies
+https://smart.pendy.dpdns.org/bee.php?id=UK_Great_Movies_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Sky Cinema Comedy" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/2560px--sky_-cinema_-comedy_-_-logo_2016.svg.png"group-title="beesport",Sky Cinema Comedy
+https://smart.pendy.dpdns.org/bee.php?id=UK_Sky_Cinema_Comedy_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Sky Cinema Family" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/2560px--sky_-cinema_-family_-_-logo_2021.svg.png"group-title="beesport",Sky Cinema Family
+https://smart.pendy.dpdns.org/bee.php?id=UK_Sky_Cinema_Family_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Cartoon Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/f-i-gsl2-n77-dpt-h-wdy-q-c-f-odhz-gf-x-a-h-sje4z3-q-a0-qn-o.png"group-title="beesport",Cartoon Network
+https://smart.pendy.dpdns.org/bee.php?id=UK_Cartoon_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Virgin 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/at-gm1kula-jyy-d-vk2-j9w-abrosv5o-uil-at-kq3r-hen2.svg"group-title="beesport",Virgin 2
+https://smart.pendy.dpdns.org/bee.php?id=UK_Virgin_2
+
+#EXTINF:-1 tvg-id="" tvg-name="Virgin 3" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/z-n1gy-tr71-xm1uia7-m8-jv-e-t0ygm-ql47v-h4-d5wu-t91.png"group-title="beesport",Virgin 3
+https://smart.pendy.dpdns.org/bee.php?id=UK_Virgin_3
+
+#EXTINF:-1 tvg-id="" tvg-name="Virgin 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/c7-mg-r-w1l-p-k-cm-sc-rd-w-b-dhs-n90-b-uc-qozpi3-v-dwtmz-a.png"group-title="beesport",Virgin 1
+https://smart.pendy.dpdns.org/bee.php?id=UK_Virgin_1
+
+#EXTINF:-1 tvg-id="" tvg-name="DAZN" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/9r-j-w92-g-j-imn-a2vfqm6v-k-er0-n-o9-k-l8-b-phk-a4cv-cbq.png"group-title="beesport",DAZN
+https://smart.pendy.dpdns.org/bee.php?id=DAZN_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Bein Sports English 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/v-hu-vg-g-s-gu-t-yy-i2usg-k8-bh-y-ov-fo-pv9n-g65z-dm-txo3.png"group-title="beesport",Bein Sports English 2
+https://smart.pendy.dpdns.org/bee.php?id=Bein_Sports_English_2_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Premier League" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/x5ja5w1659624783.png"group-title="beesport",SuperSport Premier League
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Premier_League_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport LaLiga" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/a8a882fb16572f8d4c1980b75b27201d.jpg"group-title="beesport",SuperSport LaLiga
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_LaLiga_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Action" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/ss-action.png"group-title="beesport",SuperSport Action
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Action_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Blitz" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/supersport.width-800.jpg"group-title="beesport",SuperSport Blitz
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Blitz_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Cricket" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/srtijz1643382350.png"group-title="beesport",SuperSport Cricket
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Cricket_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Football" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/7lxofw1656964140.png"group-title="beesport",SuperSport Football
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Football_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Golf" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/super-sport-golf-logo.png"group-title="beesport",SuperSport Golf
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Golf_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Rugby" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/scvqpc1642604954.png"group-title="beesport",SuperSport Rugby
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Rugby_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="SuperSport Tennis" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/supersport-tennis.png"group-title="beesport",SuperSport Tennis
+https://smart.pendy.dpdns.org/bee.php?id=SuperSport_Tennis_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Variety 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/0lwdq31638048788.png"group-title="beesport",Variety 1
+https://smart.pendy.dpdns.org/bee.php?id=Variety_1_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Variety 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/9vnt801638048828.png"group-title="beesport",Variety 2
+https://smart.pendy.dpdns.org/bee.php?id=Variety_2_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Variety 3" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/mh03f41638048848.png"group-title="beesport",Variety 3
+https://smart.pendy.dpdns.org/bee.php?id=Variety_3_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Variety 4" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/jz5jpt1638048871.png"group-title="beesport",Variety 4
+https://smart.pendy.dpdns.org/bee.php?id=Variety_4_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Eurosport 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/qoc-p83-z-t-gao-y-s-y-q-ot-p-bt-u1-ss055ay81-v6c-r1cxdk.png"group-title="beesport",Eurosport 1
+https://smart.pendy.dpdns.org/bee.php?id=Eurosport_1_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Eurosport 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/8e-oj-t6-c-f3arb-q-seorft-m-fem-cy4ww-w-azm-ta0sempl.png"group-title="beesport",Eurosport 2
+https://smart.pendy.dpdns.org/bee.php?id=Eurosport_2_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Premier Sports 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/s-p4-kxd-v-lp-hl9-y-t-fb-e-wz-m0-n8k-kkgg-h-pkccaqcc-bdu.png"group-title="beesport",Premier Sports 1
+https://smart.pendy.dpdns.org/bee.php?id=Premier_Sports_1
+
+#EXTINF:-1 tvg-id="" tvg-name="Premier Sports 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/1-gbngsz7-d-l-xy3x6-m-sk5xw-fj3-h-v42-r-e-cr-p1h4-dlyn.png"group-title="beesport",Premier Sports 2
+https://smart.pendy.dpdns.org/bee.php?id=Premier_Sports_2
+
+#EXTINF:-1 tvg-id="" tvg-name="Golf Channel" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/r-a5-e-z-f-zrrvis-h-c-m5l-b-r-y-f7yu8h5-x04qu-ka-b047-a-v.png"group-title="beesport",Golf Channel
+https://smart.pendy.dpdns.org/bee.php?id=Golf_Channel_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="MLB Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/1200px--m-l-b-network-logo.svg.png"group-title="beesport",MLB Network
+https://smart.pendy.dpdns.org/bee.php?id=MLB_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="NBA TV" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/1200px--n-b-a_-t-v.svg.png"group-title="beesport",NBA TV
+https://smart.pendy.dpdns.org/bee.php?id=NBA_TV_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="NFL Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/m-g3-iq91-ukrb-cn24-w-zuxpr-j-mm-b9tv-m7-hb-b3-v9-gw95.svg"group-title="beesport",NFL Network
+https://smart.pendy.dpdns.org/bee.php?id=NFL_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="NFL REDZONE" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/iwzyqv-vw-j0c-du-w3-mr-mb3cg82e-e-mr-m-b-v-y-e-nw-hw-fmh.png"group-title="beesport",NFL REDZONE
+https://smart.pendy.dpdns.org/bee.php?id=NFL_REDZONE_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="NHL Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/8z795-gbo1duqut1-f32-ga-ip-b-a8-urzp90c-g-u-dm-r-c2-o.svg"group-title="beesport",NHL Network
+https://smart.pendy.dpdns.org/bee.php?id=NHL_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="WWE" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/c-l33-tbx4-bvcvs8s-p-zfvwzd-nk-r-b-vncgag-w-jy-x-k-ol-t.png"group-title="beesport",WWE
+https://smart.pendy.dpdns.org/bee.php?id=WWE_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Willow Cricket" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/to0if-g-f-pzs3i-my1-d-spsrs3-sv-wn-k-h-m-sya-fz6b-meh4.png"group-title="beesport",Willow Cricket
+https://smart.pendy.dpdns.org/bee.php?id=Willow_Cricket_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Willow Extra" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/k9-cbp-r-zcaom-r-jayck5v-qr-m-o-n-zqop9v1-e-s-u-z-g-kk3b.png"group-title="beesport",Willow Extra
+https://smart.pendy.dpdns.org/bee.php?id=Willow_Extra_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="World Fishing Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/ui-yy7ozk-m-unr-o33oc-izqx-el5-ewy-kg-v2vo-p-no-i-e-b-b.svg"group-title="beesport",World Fishing Network
+https://smart.pendy.dpdns.org/bee.php?id=World_Fishing_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="ESPN" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/xs7-c-u-j2d-j-h-r-i6s-zgr7-dyp-n-s-a-mn-z7-kpq-hf6y-wwvx-i.png"group-title="beesport",ESPN
+https://smart.pendy.dpdns.org/bee.php?id=ESPN_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="ESPN 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/512px--e-s-p-n2_logo.svg.png"group-title="beesport",ESPN 2
+https://smart.pendy.dpdns.org/bee.php?id=ESPN_2_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="ESPN News" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/2-g-ojo-g33-ls-wv-cf3-j-a-h-z-ojpp3y4-q4-fuj-c-p-r-oi-r-m4o.png"group-title="beesport",ESPN News
+https://smart.pendy.dpdns.org/bee.php?id=ESPN_News_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="ESPN U" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/t9vr-m9-p-v1p-y-wh-rm-v-d-tj-dxo-d-af-xb3-zz67-f-dn-pane-y.png"group-title="beesport",ESPN U
+https://smart.pendy.dpdns.org/bee.php?id=ESPN_U_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="ITV 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/t-t-zte39n-nu-a-z-cr-to-h-c7k5-shg-n-yaa9-ccl-iljf2onx.png"group-title="beesport",ITV 1
+https://smart.pendy.dpdns.org/bee.php?id=ITV_1
+
+#EXTINF:-1 tvg-id="" tvg-name="ITV 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/f-pt-eo-s-rm-jk-n-b1-qg9v-b-x-n-l-la-m-z-vp6-i-w4-l-j-t7-j-g01-c.png"group-title="beesport",ITV 2
+https://smart.pendy.dpdns.org/bee.php?id=ITV_2
+
+#EXTINF:-1 tvg-id="" tvg-name="ITV 3" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/3j3ra-qdk-rm3-cz-c9l-iyhrk-si82-oyshnipxl8os-sm-n.png"group-title="beesport",ITV 3
+https://smart.pendy.dpdns.org/bee.php?id=ITV_3
+
+#EXTINF:-1 tvg-id="" tvg-name="ITV 4" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/d0-sx-p-n7-cb6-o-n-rdi-m-w-bnrzrrzgu-k-u-srs-h-d-b-q-gy-l5w.png"group-title="beesport",ITV 4
+https://smart.pendy.dpdns.org/bee.php?id=ITV_4
+
+#EXTINF:-1 tvg-id="" tvg-name="MUTV" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/nd9b-n-us-b-m0lw-zka-ilkgas-bu-v-b4-y-b-fcug6-va-j-c-y-i-g.png"group-title="beesport",MUTV
+https://smart.pendy.dpdns.org/bee.php?id=MUTV_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="LFC TV" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/microsoft-teams-image_(13).png"group-title="beesport",LFC TV
+https://smart.pendy.dpdns.org/bee.php?id=LFC_TV_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="FOX NEWS" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/768px--fox_-news_-channel_logo.svg.png"group-title="beesport",FOX NEWS
+https://smart.pendy.dpdns.org/bee.php?id=FOX_NEWS_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="ACC Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/a-c-c_-network_-raycom_-logo.png"group-title="beesport",ACC Network
+https://smart.pendy.dpdns.org/bee.php?id=ACC_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Fight Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/x-c1-yl3tu1-ga-wl-e-o3b-w-aiye3e127-l5yarb-ot2-ezxe.png"group-title="beesport",Fight Network
+https://smart.pendy.dpdns.org/bee.php?id=Fight_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="CBS Sports Network" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/a4df4ef049b119253c9833bea8ed6515.jpg"group-title="beesport",CBS Sports Network
+https://smart.pendy.dpdns.org/bee.php?id=CBS_Sports_Network_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="CNBC" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/t-tgl-m-ns6-d-r6bcw3qf-il-l8a-rg-k-l-ll-dmc-p-v5h7-s-wg-d.png"group-title="beesport",CNBC
+https://smart.pendy.dpdns.org/bee.php?id=CNBC_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Fox Sports 1" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/y7-y-yvh-ej8piz6c2-ium-vye-z-q77au-v4-p-do-h-s-nen-d-qr.png"group-title="beesport",Fox Sports 1
+https://smart.pendy.dpdns.org/bee.php?id=Fox_Sports_1_Live_TV
+
+#EXTINF:-1 tvg-id="" tvg-name="Fox Sports 2" tvg-logo="https://static.quickgrow.net/public/images/tv-channels/6-ff-p-flc-r8kqe-k-o-n6-x-v0-cjr-mfei5gtm-e3-wj-x7e-vk-a.png"group-title="beesport",Fox Sports 2
+https://smart.pendy.dpdns.org/bee.php?id=Fox_Sports_2_Live_TV
+
+
+
+
+
+
+
 #EXTINF:-1 tvg-id="翡翠台" tvg-name="翡翠台" tvg-logo="" group-title="香港频道",翡翠台
 https://smart.pendy.dpdns.org/Smart.php?id=jade_twn
 #EXTINF:-1 tvg-id="翡翠台 backup" tvg-name="翡翠台 backup" tvg-logo="" group-title="香港频道",翡翠台 backup
