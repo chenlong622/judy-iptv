@@ -1,5 +1,7 @@
 #EXTM3U
 #EXTM3U x-tvg-url="https://epg.iill.top/epg.xml"
+#EXTINF:-1 tvg-id="User-Agent" tvg-name="User-Agent" tvg-logo="" group-title="4G台湾",Goiptv/8.8.8
+https://litv.858.qzz.io/litv.php?id=4gtv-4gtv001
 #EXTINF:-1 tvg-id="民视台湾台" tvg-name="民视台湾台" tvg-logo="" group-title="4G台湾",民视台湾台
 https://litv.858.qzz.io/litv.php?id=4gtv-4gtv001
 #EXTINF:-1 tvg-id="民视" tvg-name="民视" tvg-logo="" group-title="4G台湾",民视
