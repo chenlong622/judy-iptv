@@ -24,6 +24,7 @@
 
 2. **导入 IPTV 播放器**
    - 推荐播放器：
+     - [😈 强烈推荐 PC端 播放器](https://github.com/CharmingCheung/CharmingTVBox/releases)
      - [VLC Player](https://www.videolan.org/vlc/)
      - [PotPlayer](https://potplayer.daum.net/)
      - [IPTV Smarters](https://www.iptvsmarters.com/)
