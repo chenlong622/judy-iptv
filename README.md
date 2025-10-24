@@ -4,18 +4,7 @@
 Telegram群: [欢迎加入](https://t.me/GPT_858)
 ---
 
-## 📂 文件列表
 
-| 文件名            | 说明                   | 更新时间    |
-|-------------------|------------------------|-------------|
-| `4GTV.m3u`        | 4GTV 频道列表          | 昨天        |
-| `MytvSuper-Ts.m3u`| MytvSuper TS 频道列表  | 上周        |
-| `MytvSuper.m3u`   | MytvSuper 频道列表     | 昨天        |
-| `beesports.m3u`   | 体育频道列表           | 4天前       |
-| `logo-smart.m3u`  | 智能电视Logo频道       | 上周        |
-| `smart.m3u`       | 智能电视频道列表       | 上周        |
-
----
 
 ## ▶️ 使用方法
 
