@@ -20,28 +20,19 @@ Telegram 群：[欢迎加入](https://t.me/GPT_858)
      - [IPTV Smarters](https://www.iptvsmarters.com/)
      - 智能电视自带 IPTV 播放器
 
-## 📺 订阅地址一览
 
-- 4GTV 订阅地址:  
-  `https://raw.githubusercontent.com/judy-gotv/iptv/main/4GTV.m3u`
+## 📝 在线订阅地址
 
-- 4gtv 订阅地址:  
-  `https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u`
+你可以将以下链接**直接复制粘贴到播放器**实现在线订阅：
 
-- MytvSuper-Ts 订阅地址:  
-  `https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u`
+- 4GTV: `https://raw.githubusercontent.com/judy-gotv/iptv/main/4GTV.m3u`
+- 4gtv: `https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u`
+- MytvSuper-Ts: `https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u`
+- MytvSuper: `https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper.m3u`
+- beesports: `https://raw.githubusercontent.com/judy-gotv/iptv/main/beesports.m3u`
+- logo-smart: `https://raw.githubusercontent.com/judy-gotv/iptv/main/logo-smart.m3u`
+- smart: `https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u`
 
-- MytvSuper 订阅地址:  
-  `https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper.m3u`
-
-- beesports 订阅地址:  
-  `https://raw.githubusercontent.com/judy-gotv/iptv/main/beesports.m3u`
-
-- logo-smart 订阅地址:  
-  `https://raw.githubusercontent.com/judy-gotv/iptv/main/logo-smart.m3u`
-
-- smart 订阅地址:  
-  `https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u`
 
 
 4. **导入示例（以 VLC 为例）**  
