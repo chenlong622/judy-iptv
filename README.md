@@ -14,7 +14,7 @@ Telegram 群：[欢迎加入](https://t.me/GPT_858)
 
 2. **导入 IPTV 播放器**  
    - 推荐播放器：
-     - [😈 强烈推荐 PC端播放器](https://github.com/CharmingCheung/CharmingTVBox/releases)
+     - [😈 强烈推荐Charming Player  PC端播放器](https://github.com/CharmingCheung/CharmingTVBox/releases)
      - [VLC Player](https://www.videolan.org/vlc/)
      - [PotPlayer](https://potplayer.daum.net/)
      - [IPTV Smarters](https://www.iptvsmarters.com/)
@@ -25,7 +25,6 @@ Telegram 群：[欢迎加入](https://t.me/GPT_858)
 
 你可以将以下链接 **直接复制粘贴到播放器** 实现在线订阅：
 
-- 4GTV: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/4GTV.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/4GTV.m3u)
 - ofiii: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/ofiii.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/ofiii.m3u)
 - 4gtv: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u)
 - MytvSuper-Ts: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u)
