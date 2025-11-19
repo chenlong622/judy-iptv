@@ -26,7 +26,7 @@ Telegram 群：[欢迎加入](https://t.me/GPT_858)
 你可以将以下链接 **直接复制粘贴到播放器** 实现在线订阅：
 
 - ofiii: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/ofiii.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/ofiii.m3u)
-- ofiii点播全站数据(自动同步): [`https://ofiii.passwdword.xyz/ofiii.php`](https://ofiii.passwdword.xyz/ofiii.php)
+- ofiii点播全站数据(自动同步) 直接打开网页播放，不是订阅: [`https://ofiii.passwdword.xyz/ofiii.php`](https://ofiii.passwdword.xyz/ofiii.php)
 - 4gtv: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u)
 - MytvSuper-Ts: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u)
 - MytvSuper: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper.m3u)
