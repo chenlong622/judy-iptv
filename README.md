@@ -27,6 +27,7 @@ Telegram 群：[欢迎加入](https://t.me/GPT_858)
 
 - ofiii: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/ofiii.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/ofiii.m3u)
 - 4gtv: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/4gtv.m3u)
+- litv: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/litv.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/litv.m3u)
 - MytvSuper-Ts: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper-Ts.m3u)
 - MytvSuper: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/MytvSuper.m3u)
 - beesports: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/beesports.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/beesports.m3u)
