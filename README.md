@@ -15,11 +15,9 @@ Telegram 群：[欢迎加入](https://t.me/GPT_858)
 2. **导入 IPTV 播放器**  
    - 推荐播放器：
      - [😈 强烈推荐Charming Player  PC端播放器](https://github.com/CharmingCheung/CharmingTVBox/releases)
-     - [VLC Player](https://www.videolan.org/vlc/)
-     - [PotPlayer](https://potplayer.daum.net/)
-     - [IPTV Smarters](https://www.iptvsmarters.com/)
-     - 智能电视自带 IPTV 播放器
-
+  播放器界面预览
+![image.png](https://img.111451444.xyz/files/QWdBRDNBVUFBdE93R0VVOmwnmaI-xqN70UxuXnmTuQl_Y2tCTdW9jeGvASzu-1FC.png)
+![image.png](https://img.111451444.xyz/files/QWdBREh3WUFBbWttRUVVOiXn5gSow0tNBbj2BBLEqbiJAOnSqOmuBiKtPmK24ts4.png)
 
 ## 📝 在线订阅地址
 
