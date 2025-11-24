@@ -1,4 +1,10 @@
 #EXTM3U x-tvg-url="https://epg.iill.top/epg.xml"
+#EXTINF:-1,tvg-id="NOW爆谷星影台" tvg-name="NOW爆谷星影台" tvg-logo="https://epg.112114.xyz/logo/NOW爆谷星影台.png" group-title="戲劇電影",NOW爆谷星影台
+https://now.tzh911.qzz.io/nowxyt/xingyingtai.m3u8
+
+#EXTINF:-1,tvg-id="NOW爆谷台" tvg-name="NOW爆谷台" tvg-logo="https://epg.112114.xyz/logo/NOW爆谷台.png" group-title="戲劇電影",爆谷台
+https://now.tzh911.qzz.io/nowbgt/baogutai.m3u8
+
 #EXTINF:-1 tvg-id="翡翠台" tvg-name="翡翠台" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/TVB1.png" group-title="綜合",翡翠台
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
