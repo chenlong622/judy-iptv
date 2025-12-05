@@ -1,9 +1,9 @@
 #EXTM3U
 #EXTM3U x-tvg-url="https://epg.iill.top/epg.xml"
-#EXTINF:-1,tvg-id="NOW爆谷" tvg-name="NOW爆谷" tvg-logo="" group-title="香港频道",NOW爆谷星影台
+#EXTINF:-1 tvg-id="NOW爆谷" tvg-name="NOW爆谷" tvg-logo="" group-title="香港频道",NOW爆谷星影台
 https://bee.946985.filegear-sg.me/nowxyt/xingyingtai.m3u8
 
-#EXTINF:-1,tvg-id="Now爆谷台" tvg-name="Now爆谷台" tvg-logo="" group-title="香港频道",NOW爆谷台
+#EXTINF:-1 tvg-id="Now爆谷台" tvg-name="Now爆谷台" tvg-logo="" group-title="香港频道",NOW爆谷台
 https://bee.946985.filegear-sg.me/nowbgt/baogutai.m3u8
 
 #EXTINF:-1 tvg-id="翡翠台" tvg-name="翡翠台" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/TVB1.png" group-title="香港频道",翡翠台 4K
@@ -39,3 +39,4 @@ https://tvb.go-iptv.ggff.net/stream/tvb/null/master.m3u8?u=admins&p=fa956b808c8f
 #EXTINF:-1 tvg-id="鳳凰香港" tvg-name="凤凰卫视香港台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰卫视香港.png" group-title="香港频道",鳳凰衛視香港台
 
 https://tvb.go-iptv.ggff.net/stream/tvb/null-1/master.m3u8?u=admins&p=fa956b808c8f8e3b59be14d7d584761e041a8359d58ba7e1829f12605d76203a
+
