@@ -32,7 +32,7 @@ Telegram 群：[欢迎加入](https://t.me/GPT_858)
 - beesports: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/beesports.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/beesports.m3u)
 - logo-smart: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/logo-smart.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/logo-smart.m3u)
 - smart: [`https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u`](https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u)
-- ofiii点播全站数据(自动同步) 直接打开网页播放，不是订阅: [`https://ofiii.passwdword.xyz/ofiii.php`](https://ofiii.passwdword.xyz/ofiii.php)
+- ofiii点播全站数据(自动同步) 直接打开网页播放，不是订阅: [`https://edgeone.passwdword.xyz/ofiii.php`](https://edgeone.passwdword.xyz/ofiii.php)
 
 
 
