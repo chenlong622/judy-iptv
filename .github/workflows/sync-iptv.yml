@@ -40,10 +40,17 @@ jobs:
           echo "Downloading sports.m3u -> Nowsports.m3u"
           curl -L -o "Nowsports.m3u" "https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/TVBoxOSC/tvbox/sports.m3u"
 
+      # 🔽 新增：下载 StarHub.m3u
+      - name: Download StarHub.m3u
+        run: |
+          echo "Downloading StarHub.m3u"
+          curl -L -o "StarHub.m3u" "https://raw.githubusercontent.com/AbidUrsa/StarHubPlaylist/refs/heads/main/StarHub.m3u"
+
       - name: Commit and Push if changed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
