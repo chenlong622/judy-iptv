@@ -1,0 +1,12 @@
+安装对应填写
+
+
+Image Name  python:3.11-slim
+
+Container Port  8000
+
+Command   python -c
+
+Arguments   import os,subprocess,urllib.request; os.makedirs('/work', exist_ok=True); urllib.request.urlretrieve('https://raw.githubusercontent.com/judy-gotv/iptv/main/py/mgak_fastapi_single.py','/work/app.py'); subprocess.check_call(['pip','install','--no-cache-dir','fastapi','uvicorn','requests']); os.chdir('/work'); subprocess.check_call(['uvicorn','app:app','--host','0.0.0.0','--port','8000'])
+
+
